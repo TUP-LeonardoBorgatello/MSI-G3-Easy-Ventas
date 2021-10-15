@@ -21,12 +21,12 @@ public class Factura {
 
     @ManyToOne()
     @JoinColumn(name = "id_forma_entrega", nullable = false)
-    private MetodoPago formaEntrega;
+    private FormaEntrega formaEntrega;
 
     @OneToMany(mappedBy = "factura")
     private List<DetalleFactura> detalleFacturas;
 
-    public Factura(Date fecha, MetodoPago metodoPago, MetodoPago formaEntrega, List<DetalleFactura> detalleFacturas) {
+    public Factura(Date fecha, MetodoPago metodoPago, FormaEntrega formaEntrega, List<DetalleFactura> detalleFacturas) {
         this.fecha = fecha;
         this.metodoPago = metodoPago;
         this.formaEntrega = formaEntrega;
@@ -69,11 +69,11 @@ public class Factura {
         this.metodoPago = metodoPago;
     }
 
-    public MetodoPago getFormaEntrega() {
+    public FormaEntrega getFormaEntrega() {
         return formaEntrega;
     }
 
-    public void setFormaEntrega(MetodoPago formaEntrega) {
+    public void setFormaEntrega(FormaEntrega formaEntrega) {
         this.formaEntrega = formaEntrega;
     }
 }
