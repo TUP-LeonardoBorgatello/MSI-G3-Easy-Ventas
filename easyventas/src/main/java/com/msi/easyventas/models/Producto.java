@@ -23,6 +23,18 @@ public class Producto {
     @OneToMany(mappedBy = "producto")
     private List<DetallePedido> detallePedidos;
 
+    @ManyToOne()
+    @JoinColumn(name = "id_tipo_producto", nullable = false)
+    private TipoProducto tipoProducto;
+
+    public TipoProducto getTipoProducto() {
+        return tipoProducto;
+    }
+
+    public void setTipoProducto(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
+    }
+
     public long getIdProducto() {
         return idProducto;
     }
@@ -74,11 +86,12 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String descripcion, long stock, double precioVenta, long sku, List<DetallePedido> detallePedidos) {
+    public Producto(String descripcion, long stock, double precioVenta, long sku, List<DetallePedido> detallePedidos, TipoProducto tipoProducto) {
         this.descripcion = descripcion;
         this.stock = stock;
         this.precioVenta = precioVenta;
         this.sku = sku;
         this.detallePedidos = detallePedidos;
+        this.tipoProducto = tipoProducto;
     }
 }
