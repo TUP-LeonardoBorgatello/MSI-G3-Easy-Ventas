@@ -17,6 +17,8 @@ public class Producto {
     private long stock;
     @Column(nullable = false)
     private double precioVenta;
+    @Column(nullable = false)
+    private long sku;
 
     @OneToMany(mappedBy = "producto")
     private List<DetallePedido> detallePedidos;
@@ -45,6 +47,21 @@ public class Producto {
         this.stock = stock;
     }
 
+    public long getSku() {
+        return sku;
+    }
+
+    public void setSku(long sku) {
+        this.sku = sku;
+    }
+
+    public List<DetallePedido> getDetallePedidos() {
+        return detallePedidos;
+    }
+
+    public void setDetallePedidos(List<DetallePedido> detallePedidos) {
+        this.detallePedidos = detallePedidos;
+    }
 
     public double getPrecioVenta() {
         return precioVenta;
@@ -57,9 +74,11 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String descripcion, long stock, double precioVenta) {
+    public Producto(String descripcion, long stock, double precioVenta, long sku, List<DetallePedido> detallePedidos) {
         this.descripcion = descripcion;
         this.stock = stock;
         this.precioVenta = precioVenta;
+        this.sku = sku;
+        this.detallePedidos = detallePedidos;
     }
 }
