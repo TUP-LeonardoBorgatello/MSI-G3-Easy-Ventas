@@ -2,6 +2,7 @@ package com.msi.easyventas.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "pedidos")
@@ -26,15 +27,27 @@ public class Pedido {
     @JoinColumn(name = "id_estado", nullable = false)
     private Estado estado;
 
+    @OneToMany(mappedBy = "pedido")
+    private List<DetallePedido> detallePedidos;
 
-    public Pedido(Date fecha, Cliente cliente, Empleado empleado, Estado estado) {
-        this.fechaPedido = fecha;
+
+    public Pedido(Date fechaPedido, Cliente cliente, Empleado empleado, Estado estado, List<DetallePedido> detallePedidos) {
+        this.fechaPedido = fechaPedido;
         this.cliente = cliente;
         this.empleado = empleado;
         this.estado = estado;
+        this.detallePedidos = detallePedidos;
     }
 
     public Pedido() {
+    }
+
+    public List<DetallePedido> getDetallePedidos() {
+        return detallePedidos;
+    }
+
+    public void setDetallePedidos(List<DetallePedido> detallePedidos) {
+        this.detallePedidos = detallePedidos;
     }
 
     public long getIdPedido() {
