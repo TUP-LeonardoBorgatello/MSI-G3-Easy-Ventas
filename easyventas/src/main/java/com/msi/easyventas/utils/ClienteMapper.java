@@ -15,6 +15,7 @@ public class ClienteMapper {
         clienteResponseDTO.setEmail(cliente.getEmail());
         clienteResponseDTO.setEstado(cliente.getEstado());
         clienteResponseDTO.setTipoDocumento(cliente.getTipoDoc().getDescripcion());
+        clienteResponseDTO.setDocumento(cliente.getDocumento());
 
         return clienteResponseDTO;
     }

@@ -13,6 +13,8 @@ public class Cliente {
     @Column(length = 30, nullable = false)
     private String nombre;
     @Column(length = 30, nullable = false)
+    private int documento;
+    @Column(length = 30, nullable = false)
     private String apellido;
     @Column(length = 50, nullable = false)
     private String domicilio;
@@ -43,6 +45,14 @@ public class Cliente {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(int documento) {
+        this.documento = documento;
     }
 
     public String getApellido() {
@@ -93,8 +103,9 @@ public class Cliente {
         this.tipoDoc = tipoDoc;
     }
 
-    public Cliente(String nombre, String apellido, String domicilio, String email, Boolean estado, Ciudad ciudad, TipoDoc tipoDoc) {
+    public Cliente(String nombre, int documento, String apellido, String domicilio, String email, Boolean estado, Ciudad ciudad, TipoDoc tipoDoc) {
         this.nombre = nombre;
+        this.documento = documento;
         this.apellido = apellido;
         this.domicilio = domicilio;
         this.email = email;

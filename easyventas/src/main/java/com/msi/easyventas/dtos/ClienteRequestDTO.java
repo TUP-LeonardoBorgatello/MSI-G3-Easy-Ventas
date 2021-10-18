@@ -9,12 +9,13 @@ public class ClienteRequestDTO {
     private Boolean estado;
     private long id_ciudad;
     private long id_tipo_doc;
+    private int documento;
 
 
     public ClienteRequestDTO() {
     }
 
-    public ClienteRequestDTO(String nombre, String apellido, String domicilio, String email, Boolean estado, long id_ciudad, long id_tipo_doc) {
+    public ClienteRequestDTO(String nombre, String apellido, String domicilio, String email, Boolean estado, long id_ciudad, long id_tipo_doc, int documento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.domicilio = domicilio;
@@ -22,6 +23,15 @@ public class ClienteRequestDTO {
         this.estado = estado;
         this.id_ciudad = id_ciudad;
         this.id_tipo_doc = id_tipo_doc;
+        this.documento = documento;
+    }
+
+    public int getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(int documento) {
+        this.documento = documento;
     }
 
     public long getId_ciudad() {
