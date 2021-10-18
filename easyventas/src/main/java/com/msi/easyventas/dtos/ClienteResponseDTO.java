@@ -9,12 +9,12 @@ public class ClienteResponseDTO {
     private boolean estado;
     private String ciudad;
     private String tipoDocumento;
-
+    private int documento;
 
     public ClienteResponseDTO() {
     }
 
-    public ClienteResponseDTO(String nombre, String apellido, String domicilio, String email, boolean estado, String ciudad, String tipoDocumento) {
+    public ClienteResponseDTO(String nombre, String apellido, String domicilio, String email, boolean estado, String ciudad, String tipoDocumento, int documento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.domicilio = domicilio;
@@ -22,6 +22,15 @@ public class ClienteResponseDTO {
         this.estado = estado;
         this.ciudad = ciudad;
         this.tipoDocumento = tipoDocumento;
+        this.documento = documento;
+    }
+
+    public int getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(int documento) {
+        this.documento = documento;
     }
 
     public String getTipoDocumento() {
