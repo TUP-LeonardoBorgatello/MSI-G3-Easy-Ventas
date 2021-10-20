@@ -1,6 +1,12 @@
 package com.msi.easyventas.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +18,9 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pedido", length = 10)
     private long idPedido;
+
     @Column(nullable = false)
-    private Date fechaPedido;
+    private LocalDate fechaPedido;
 
     @ManyToOne()
     @JoinColumn(name = "id_cliente", nullable = false)
@@ -31,7 +38,7 @@ public class Pedido {
     private List<DetallePedido> detallePedidos;
 
 
-    public Pedido(Date fechaPedido, Cliente cliente, Empleado empleado, Estado estado, List<DetallePedido> detallePedidos) {
+    public Pedido(LocalDate fechaPedido, Cliente cliente, Empleado empleado, Estado estado, List<DetallePedido> detallePedidos) {
         this.fechaPedido = fechaPedido;
         this.cliente = cliente;
         this.empleado = empleado;
@@ -58,11 +65,11 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public Date getFechaPedido() {
+    public LocalDate getFechaPedido() {
         return fechaPedido;
     }
 
-    public void setFechaPedido(Date fecha) {
+    public void setFechaPedido(LocalDate fecha) {
         this.fechaPedido = fecha;
     }
 
