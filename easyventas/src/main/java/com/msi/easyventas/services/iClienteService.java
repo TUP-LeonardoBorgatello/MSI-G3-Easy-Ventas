@@ -2,7 +2,6 @@ package com.msi.easyventas.services;
 
 import com.msi.easyventas.dtos.ClienteRequestDTO;
 import com.msi.easyventas.dtos.ClienteResponseDTO;
-import com.msi.easyventas.models.Cliente;
 
 import java.util.List;
 
