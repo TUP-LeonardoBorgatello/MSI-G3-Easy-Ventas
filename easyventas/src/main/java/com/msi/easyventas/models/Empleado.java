@@ -18,6 +18,10 @@ public class Empleado {
     private String domicilio;
     @Column(nullable = false)
     private boolean estado;
+    @Column(nullable = false)
+    private int genero;
+    @Column(nullable = false)
+    private int documento;
 
     @ManyToOne()
     @JoinColumn(name = "id_ciudad", nullable = false)
@@ -30,6 +34,22 @@ public class Empleado {
     @ManyToOne()
     @JoinColumn(name = "id_rol_empleado", nullable = false)
     private RolEmpleado rolEmpleado;
+
+    public int getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(int documento) {
+        this.documento = documento;
+    }
+
+    public long getGenero() {
+        return genero;
+    }
+
+    public void setGenero(int genero) {
+        this.genero = genero;
+    }
 
     public boolean isEstado() {
         return estado;
@@ -95,11 +115,13 @@ public class Empleado {
         this.rolEmpleado = rolEmpleado;
     }
 
-    public Empleado(String nombre, String apellido, String domicilio, boolean estado, Ciudad ciudad, TipoDoc tipoDoc, RolEmpleado rolEmpleado) {
+    public Empleado(String nombre, String apellido, String domicilio, boolean estado, int genero, int documento, Ciudad ciudad, TipoDoc tipoDoc, RolEmpleado rolEmpleado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.domicilio = domicilio;
         this.estado = estado;
+        this.genero = genero;
+        this.documento = documento;
         this.ciudad = ciudad;
         this.tipoDoc = tipoDoc;
         this.rolEmpleado = rolEmpleado;

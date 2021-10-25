@@ -11,8 +11,6 @@ public class DetallePedido {
     @Column(name = "id_detalle_pedido", length = 10)
     private long idDetallePedido;
     @Column(nullable = false)
-    private double precio;
-    @Column(nullable = false)
     private long cantidad;
 
     @ManyToOne()
@@ -23,8 +21,7 @@ public class DetallePedido {
     @JoinColumn(name = "id_producto", nullable = false)
     private Producto producto;
 
-    public DetallePedido(double precio, long cantidad, Pedido pedido, Producto producto) {
-        this.precio = precio;
+    public DetallePedido(long cantidad, Pedido pedido, Producto producto) {
         this.cantidad = cantidad;
         this.pedido = pedido;
         this.producto = producto;
@@ -39,14 +36,6 @@ public class DetallePedido {
 
     public void setIdDetallePedido(long idDetallePedido) {
         this.idDetallePedido = idDetallePedido;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
     }
 
     public long getCantidad() {
