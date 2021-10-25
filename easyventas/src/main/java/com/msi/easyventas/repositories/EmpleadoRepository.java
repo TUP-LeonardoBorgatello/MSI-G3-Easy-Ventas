@@ -14,7 +14,7 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Long> {
 
     boolean existsByDocumento(int documento);
 
-    @Query(value = "select * from Empleados where documento like %:documento%", nativeQuery = true)
+    @Query(value = "select * from Empleados where documento = :documento", nativeQuery = true)
     List<Empleado> searchByDocumento(@Param("documento") int documento);
 
     @Modifying

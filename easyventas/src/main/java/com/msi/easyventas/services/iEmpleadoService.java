@@ -15,5 +15,5 @@ public interface iEmpleadoService {
 
     void changeEmpleadoStatus(EmpleadoResponseDTO empleadoResponseDTO) throws Exception;
 
-    //void updateEmpleado(EmpleadoRequestDTO empleadoRequestDTO) throws Exception;
+    void updateEmpleado(EmpleadoRequestDTO empleadoRequestDTO) throws Exception;
 }
