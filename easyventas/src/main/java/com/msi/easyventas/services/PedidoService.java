@@ -1,5 +1,7 @@
 package com.msi.easyventas.services;
 
+import com.msi.easyventas.dtos.DetallePedidoRequestDTO;
+import com.msi.easyventas.dtos.PedidoDeleteRequestDTO;
 import com.msi.easyventas.dtos.PedidoRequestDTO;
 import com.msi.easyventas.dtos.PedidoResponseDTO;
 import com.msi.easyventas.models.*;
@@ -31,6 +33,9 @@ public class PedidoService implements iPedidoService {
     @Autowired
     iEstadoRepository estadoRepository;
 
+    @Autowired
+    iProductoRepository productoRepository;
+
     @Override
     public List<PedidoResponseDTO> findAllPedidos() {
         List<Pedido> pedidos = pedidoRepository.findAll();
@@ -43,7 +48,7 @@ public class PedidoService implements iPedidoService {
             List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(p.getIdPedido());
             for (DetallePedido d : detallePedidos) {
                 cantTotal += d.getCantidad();
-                monto += (d.getPrecio() * d.getCantidad());
+                monto += (d.getProducto().getPrecioVenta() * d.getCantidad());
             }
             PedidoResponseDTO pedidoResponseDTO = new PedidoResponseDTO();
             pedidoResponseDTO.setIdPedido(p.getIdPedido());
@@ -66,13 +71,13 @@ public class PedidoService implements iPedidoService {
     public void addPedido(PedidoRequestDTO pedidoRequestDTO) throws Exception {
 
         if (!clienteRepository.existsById(pedidoRequestDTO.getId_cliente())
-                || !empleadoRepository.existsById(pedidoRequestDTO.getId_empleado())
-                || !estadoRepository.existsById(pedidoRequestDTO.getId_estado())) {
+                || !empleadoRepository.existsById(pedidoRequestDTO.getId_empleado())) {
             throw new NotFoundException("Alguno de los datos no existe. Verificar el cliente, empleado o estado.");
         } else {
             Cliente cliente = clienteRepository.findById(pedidoRequestDTO.getId_cliente()).orElseThrow();
             Empleado empleado = empleadoRepository.findById(pedidoRequestDTO.getId_empleado()).orElseThrow();
-            Estado estado = estadoRepository.findById(pedidoRequestDTO.getId_estado()).orElseThrow();
+            Estado estado = new Estado();
+            estado.setIdEstado(2);
 
             Pedido p = new Pedido();
 
@@ -85,5 +90,38 @@ public class PedidoService implements iPedidoService {
         }
 
     }
+
+
+    public void addDetallePedido(DetallePedidoRequestDTO detallePedidoRequestDTO) throws Exception {
+
+        if (!clienteRepository.existsById(detallePedidoRequestDTO.getId_pedido())
+                || !productoRepository.existsById(detallePedidoRequestDTO.getId_producto())) {
+            throw new NotFoundException("Alguno de los datos no existe. Verificar el pedido o poducto.");
+        } else {
+            Producto producto = productoRepository.findById(detallePedidoRequestDTO.getId_producto()).orElseThrow();
+            Pedido pedido = pedidoRepository.getById(detallePedidoRequestDTO.getId_pedido());
+
+            DetallePedido d = new DetallePedido();
+
+            d.setPedido(pedido);
+            d.setCantidad(detallePedidoRequestDTO.getCantidad());
+            d.setProducto(producto);
+
+            detallePedidoRepository.save(d);
+        }
+
+    }
+
+    public void deletePedido(PedidoDeleteRequestDTO pedidoDelete) throws Exception {
+
+        List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(pedidoDelete.getId_pedido());
+        if (detallePedidos.isEmpty()) {
+            pedidoRepository.deleteById(pedidoDelete.getId_pedido());
+        } else {
+            pedidoRepository.updatePedido(pedidoDelete.getId_pedido());
+        }
+    }
+
+
 }
 

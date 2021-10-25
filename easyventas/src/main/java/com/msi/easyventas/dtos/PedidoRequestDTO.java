@@ -7,13 +7,12 @@ public class PedidoRequestDTO {
     private LocalDate fecha_pedido;
     private long id_cliente;
     private long id_empleado;
-    private long id_estado;
 
-    public PedidoRequestDTO(LocalDate fechaPedido, long id_cliente, long id_empleado, long id_estado) {
+    public PedidoRequestDTO(LocalDate fechaPedido, long id_cliente, long id_empleado) {
         this.fecha_pedido = fechaPedido;
         this.id_cliente = id_cliente;
         this.id_empleado = id_empleado;
-        this.id_estado = id_estado;
+
     }
 
     public PedidoRequestDTO() {
@@ -43,11 +42,4 @@ public class PedidoRequestDTO {
         this.id_empleado = id_empleado;
     }
 
-    public long getId_estado() {
-        return id_estado;
-    }
-
-    public void setId_estado(long id_estado) {
-        this.id_estado = id_estado;
-    }
 }

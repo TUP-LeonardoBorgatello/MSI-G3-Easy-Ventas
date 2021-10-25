@@ -1,8 +1,6 @@
 package com.msi.easyventas.controllers;
 
-import com.msi.easyventas.dtos.ClienteRequestDTO;
-import com.msi.easyventas.dtos.PedidoRequestDTO;
-import com.msi.easyventas.dtos.PedidoResponseDTO;
+import com.msi.easyventas.dtos.*;
 import com.msi.easyventas.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,4 +32,24 @@ public class PedidoController {
         }
         return ResponseEntity.status(HttpStatus.OK).body("Pedido agregado con éxito");
     }
+
+    @PostMapping("/add/detalle/pedido")
+    public ResponseEntity<?> addDetallePedido(@RequestBody DetallePedidoRequestDTO nuevoDetallePedido) throws Exception {
+        if (nuevoDetallePedido != null) {
+            try {
+                pedidoService.addDetallePedido(nuevoDetallePedido);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se puedo agregar el detalle del Pedido. Verifique los datos.");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.OK).body("Detalle de pedido agregado con éxito");
+    }
+
+    @PostMapping("pedido/delete")
+    public String deletePedido(@RequestBody PedidoDeleteRequestDTO pedido) throws Exception {
+        pedidoService.deletePedido(pedido);
+        return "Pedido modificado.";
+    }
+
+
 }
