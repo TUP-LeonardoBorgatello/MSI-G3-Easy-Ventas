@@ -12,7 +12,7 @@ import java.util.List;
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     boolean existsByDocumento(int documento);
 
-    @Query(value = "select * from Clientes where documento like %:documento%", nativeQuery = true)
+    @Query(value = "select * from Clientes where documento = :documento", nativeQuery = true)
     List<Cliente> searchByDocumento(@Param("documento") int documento);
 
     void deleteByDocumento(int documento);

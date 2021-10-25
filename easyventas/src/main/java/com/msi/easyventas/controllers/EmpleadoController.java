@@ -39,7 +39,7 @@ public class EmpleadoController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(empleadoService.findEmpleadoByDocumento(documento));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el empleado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El vendedor no se encuentra en el sistema.");
         }
     }
 
@@ -49,13 +49,13 @@ public class EmpleadoController {
         return "Se ha modificado el estado del empleado.";
     }
 
-/*    @PutMapping("cliente/update")
-    public ResponseEntity<?> updateCliente(@RequestBody ClienteRequestDTO cliente) throws Exception {
+    @PutMapping("empleado/update")
+    public ResponseEntity<?> updateCliente(@RequestBody EmpleadoRequestDTO empleado) throws Exception {
         try {
-            clienteService.updateCliente(cliente);
+            empleadoService.updateEmpleado(empleado);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontró el cliente con ese documento.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontró el empleado con ese documento o es administrador.");
         }
-        return ResponseEntity.status(HttpStatus.OK).body("El cliente se modificó correctamente.");
-    }*/
+        return ResponseEntity.status(HttpStatus.OK).body("El empleado se modificó correctamente.");
+    }
 }
