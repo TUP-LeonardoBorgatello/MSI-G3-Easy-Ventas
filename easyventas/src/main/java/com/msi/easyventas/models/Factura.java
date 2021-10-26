@@ -23,25 +23,15 @@ public class Factura {
     @JoinColumn(name = "id_forma_entrega", nullable = false)
     private FormaEntrega formaEntrega;
 
-    @OneToMany(mappedBy = "factura")
-    private List<DetalleFactura> detalleFacturas;
 
-    public Factura(Date fecha, MetodoPago metodoPago, FormaEntrega formaEntrega, List<DetalleFactura> detalleFacturas) {
+    public Factura(Date fecha, MetodoPago metodoPago, FormaEntrega formaEntrega) {
         this.fecha = fecha;
         this.metodoPago = metodoPago;
         this.formaEntrega = formaEntrega;
-        this.detalleFacturas = detalleFacturas;
+
     }
 
     public Factura() {
-    }
-
-    public List<DetalleFactura> getDetalleFacturas() {
-        return detalleFacturas;
-    }
-
-    public void setDetalleFacturas(List<DetalleFactura> detalleFacturas) {
-        this.detalleFacturas = detalleFacturas;
     }
 
     public long getIdFactura() {

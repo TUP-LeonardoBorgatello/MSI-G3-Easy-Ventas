@@ -11,5 +11,13 @@ import org.springframework.stereotype.Repository;
 public interface iPedidoRepository extends JpaRepository<Pedido, Long> {
     @Modifying
     @Query(value = "UPDATE pedidos SET id_estado = '4' where id_pedido = :id_pedido", nativeQuery = true)
-    void updatePedido(@Param("id_pedido") long id_pedido);
+    void updatePedidoCanceledStatus(@Param("id_pedido") long id_pedido);
+
+    @Query(value = "SELECT max(id_pedido) from pedidos", nativeQuery = true)
+    Long lastPedidoId();
+
+    @Modifying
+    @Query(value = "UPDATE pedidos SET id_estado = '3' where id_pedido = :id_pedido", nativeQuery = true)
+    void updatePedidoFinishedStatus(@Param("id_pedido") long id_pedido);
+
 }

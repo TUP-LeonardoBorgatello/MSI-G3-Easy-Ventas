@@ -14,7 +14,7 @@ public class DetalleFactura {
     private double monto;
 
     @ManyToOne()
-    @JoinColumn(name = "id_dactura", nullable = false)
+    @JoinColumn(name = "id_factura", nullable = false)
     private Factura factura;
 
     @ManyToOne()

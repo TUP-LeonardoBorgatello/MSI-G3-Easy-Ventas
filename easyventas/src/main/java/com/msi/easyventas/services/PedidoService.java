@@ -94,22 +94,26 @@ public class PedidoService implements iPedidoService {
 
     public void addDetallePedido(DetallePedidoRequestDTO detallePedidoRequestDTO) throws Exception {
 
-        if (!clienteRepository.existsById(detallePedidoRequestDTO.getId_pedido())
-                || !productoRepository.existsById(detallePedidoRequestDTO.getId_producto())) {
+        if (!productoRepository.existsById(detallePedidoRequestDTO.getId_producto())) {
             throw new NotFoundException("Alguno de los datos no existe. Verificar el pedido o poducto.");
         } else {
             Producto producto = productoRepository.findById(detallePedidoRequestDTO.getId_producto()).orElseThrow();
-            Pedido pedido = pedidoRepository.getById(detallePedidoRequestDTO.getId_pedido());
+            if (producto.getStock() > 0 && producto.getStock() > detallePedidoRequestDTO.getCantidad()) {
+                long idPedido = pedidoRepository.lastPedidoId();
+                Pedido pedido = pedidoRepository.getById(idPedido);
 
-            DetallePedido d = new DetallePedido();
+                DetallePedido d = new DetallePedido();
 
-            d.setPedido(pedido);
-            d.setCantidad(detallePedidoRequestDTO.getCantidad());
-            d.setProducto(producto);
+                d.setPedido(pedido);
+                d.setCantidad(detallePedidoRequestDTO.getCantidad());
+                d.setProducto(producto);
 
-            detallePedidoRepository.save(d);
+                detallePedidoRepository.save(d);
+            } else {
+                throw new NotFoundException("El producto no tiene stock.");
+            }
+
         }
-
     }
 
     public void deletePedido(PedidoDeleteRequestDTO pedidoDelete) throws Exception {
@@ -118,7 +122,7 @@ public class PedidoService implements iPedidoService {
         if (detallePedidos.isEmpty()) {
             pedidoRepository.deleteById(pedidoDelete.getId_pedido());
         } else {
-            pedidoRepository.updatePedido(pedidoDelete.getId_pedido());
+            pedidoRepository.updatePedidoCanceledStatus(pedidoDelete.getId_pedido());
         }
     }
 
