@@ -39,7 +39,7 @@ public class PedidoController {
             try {
                 pedidoService.addDetallePedido(nuevoDetallePedido);
             } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se puedo agregar el detalle del Pedido. Verifique los datos.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se puedo agregar el detalle del Pedido. Verifique si el producto existe o tiene stock.");
             }
         }
         return ResponseEntity.status(HttpStatus.OK).body("Detalle de pedido agregado con éxito");
