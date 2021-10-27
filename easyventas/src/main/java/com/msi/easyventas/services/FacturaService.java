@@ -61,7 +61,7 @@ public class FacturaService implements iFacturaService {
             DetallePedidoResponseDTO detalles = new DetallePedidoResponseDTO();
             detalles.setNombreProducto(d.getProducto().getDescripcion());
             detalles.setCantidad(d.getCantidad());
-            detalles.setPrecio(d.getProducto().getPrecioVenta() * d.getCantidad());
+            detalles.setPrecioUnitario(d.getProducto().getPrecioVenta());
             montoTotal += d.getProducto().getPrecioVenta() * d.getCantidad();
 
             listaDetalles.add(detalles);
@@ -83,9 +83,8 @@ public class FacturaService implements iFacturaService {
     }
 
     @Override
-    public void addFactura(FacturaRequestDTO facturaRequestDTO) throws Exception {
+    public void addFactura(FacturaRequestDTO facturaRequestDTO, long idPedido) throws Exception {
 
-        long idPedido = pedidoRepository.lastPedidoId();
         List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(idPedido);
         if (detallePedidos.isEmpty() || !metodoEntregaRepository.existsById(facturaRequestDTO.getId_forma_entrega())
                 || !metodoPagoRepository.existsById(facturaRequestDTO.getId_metodo_pago())) {
@@ -105,9 +104,8 @@ public class FacturaService implements iFacturaService {
     }
 
     @Override
-    public void addDetalleFactura() throws Exception {
-        long idPedido = pedidoRepository.lastPedidoId();
-        Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow();
+    public void addDetalleFactura(long idPedido) throws Exception {
+        Pedido pedido= pedidoRepository.findById(idPedido).orElseThrow();
         List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(idPedido);
         double montoTotal = 0;
         long nuevoStock;
