@@ -7,8 +7,8 @@ public interface iFacturaService {
 
     FacturaResponseDTO Factura() throws Exception;
 
-    void addFactura(FacturaRequestDTO facturaRequestDTO) throws Exception;
+    void addFactura(FacturaRequestDTO facturaRequestDTO, long idPedido) throws Exception;
 
-    void addDetalleFactura() throws Exception;
+    void addDetalleFactura(long idPedido) throws Exception;
 
 }

@@ -47,26 +47,26 @@ public class EmpleadoService implements iEmpleadoService {
 
         if (empleadoRepository.existsByDocumento(empleadoRequestDTO.getDocumento()) || empleadoRequestDTO.getId_rol_empleado() == 1) {
             throw new Exception("El Vendedor ya existe o es Administrador.");
+        } else {
+            Ciudad ciudad = ciudadRepository.findById(empleadoRequestDTO.getId_ciudad()).orElseThrow();
+            TipoDoc tipoDoc = tipoDocRepository.findById(empleadoRequestDTO.getId_tipo_doc()).orElseThrow();
+            RolEmpleado rolEmpleado = new RolEmpleado();
+            rolEmpleado.setId(2);
+
+            Empleado empleado = new Empleado();
+
+            empleado.setDocumento(empleadoRequestDTO.getDocumento());
+            empleado.setGenero(empleadoRequestDTO.getGenero());
+            empleado.setRolEmpleado(rolEmpleado);
+            empleado.setApellido(empleadoRequestDTO.getApellido());
+            empleado.setCiudad(ciudad);
+            empleado.setEstado(empleadoRequestDTO.getEstado());
+            empleado.setNombre(empleadoRequestDTO.getNombre());
+            empleado.setDomicilio(empleadoRequestDTO.getDomicilio());
+            empleado.setTipoDoc(tipoDoc);
+
+            empleadoRepository.save(empleado);
         }
-
-        Ciudad ciudad = ciudadRepository.findById(empleadoRequestDTO.getId_ciudad()).orElseThrow();
-        TipoDoc tipoDoc = tipoDocRepository.findById(empleadoRequestDTO.getId_tipo_doc()).orElseThrow();
-        RolEmpleado rolEmpleado = new RolEmpleado();
-        rolEmpleado.setId(2);
-
-        Empleado empleado = new Empleado();
-
-        empleado.setDocumento(empleadoRequestDTO.getDocumento());
-        empleado.setGenero(empleadoRequestDTO.getGenero());
-        empleado.setRolEmpleado(rolEmpleado);
-        empleado.setApellido(empleadoRequestDTO.getApellido());
-        empleado.setCiudad(ciudad);
-        empleado.setEstado(empleadoRequestDTO.getEstado());
-        empleado.setNombre(empleadoRequestDTO.getNombre());
-        empleado.setDomicilio(empleadoRequestDTO.getDomicilio());
-        empleado.setTipoDoc(tipoDoc);
-
-        empleadoRepository.save(empleado);
     }
 
     @Override
