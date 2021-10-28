@@ -2,6 +2,7 @@ package com.msi.easyventas.services;
 
 import com.msi.easyventas.dtos.EmpleadoRequestDTO;
 import com.msi.easyventas.dtos.EmpleadoResponseDTO;
+import com.msi.easyventas.dtos.LoginRequestDTO;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface iEmpleadoService {
     void changeEmpleadoStatus(EmpleadoResponseDTO empleadoResponseDTO) throws Exception;
 
     void updateEmpleado(EmpleadoRequestDTO empleadoRequestDTO) throws Exception;
+
+    void login(LoginRequestDTO loginRequestDTO) throws Exception;
 }

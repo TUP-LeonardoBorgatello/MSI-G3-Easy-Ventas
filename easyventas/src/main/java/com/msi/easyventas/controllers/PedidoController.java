@@ -26,23 +26,13 @@ public class PedidoController {
         if (nuevoPedido != null) {
             try {
                 pedidoService.addPedido(nuevoPedido);
+                Thread.sleep(1000);
+                pedidoService.addDetallePedido(nuevoPedido);
             } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se puedo agregar el Pedido. Verifique los datos.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se puedo agregar el Pedido. Verifique los datos y el stock.");
             }
         }
         return ResponseEntity.status(HttpStatus.OK).body("Pedido agregado con éxito");
-    }
-
-    @PostMapping("/add/detalle/pedido")
-    public ResponseEntity<?> addDetallePedido(@RequestBody DetallePedidoRequestDTO nuevoDetallePedido) throws Exception {
-        if (nuevoDetallePedido != null) {
-            try {
-                pedidoService.addDetallePedido(nuevoDetallePedido);
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se puedo agregar el detalle del Pedido. Verifique si el producto existe o tiene stock.");
-            }
-        }
-        return ResponseEntity.status(HttpStatus.OK).body("Detalle de pedido agregado con éxito");
     }
 
     @PostMapping("pedido/delete")

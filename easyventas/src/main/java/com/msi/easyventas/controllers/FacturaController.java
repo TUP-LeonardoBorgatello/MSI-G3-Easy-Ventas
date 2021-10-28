@@ -28,7 +28,8 @@ public class FacturaController {
                 Thread.sleep(1000);
                 facturaService.addDetalleFactura(idPedido);
             } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se puedo agregar la factura. Verifique los datos.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Alguno de los datos no existe. Verificar el" +
+                        " método de pago, la forma de entrega o si el pedido está cancelado.");
             }
         }
         return ResponseEntity.status(HttpStatus.OK).body("Factura cargada con éxito");

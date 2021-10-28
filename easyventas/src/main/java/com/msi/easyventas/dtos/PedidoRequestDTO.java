@@ -7,15 +7,34 @@ public class PedidoRequestDTO {
     private LocalDate fecha_pedido;
     private long id_cliente;
     private long id_empleado;
+    private long cantidad;
+    private long id_producto;
 
-    public PedidoRequestDTO(LocalDate fechaPedido, long id_cliente, long id_empleado) {
-        this.fecha_pedido = fechaPedido;
+    public PedidoRequestDTO(LocalDate fecha_pedido, long id_cliente, long id_empleado, long cantidad, long id_producto) {
+        this.fecha_pedido = fecha_pedido;
         this.id_cliente = id_cliente;
         this.id_empleado = id_empleado;
-
+        this.cantidad = cantidad;
+        this.id_producto = id_producto;
     }
 
     public PedidoRequestDTO() {
+    }
+
+    public long getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(long cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public long getId_producto() {
+        return id_producto;
+    }
+
+    public void setId_producto(long id_producto) {
+        this.id_producto = id_producto;
     }
 
     public LocalDate getFecha_pedido() {

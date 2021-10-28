@@ -2,6 +2,7 @@ package com.msi.easyventas.services;
 
 import com.msi.easyventas.dtos.EmpleadoRequestDTO;
 import com.msi.easyventas.dtos.EmpleadoResponseDTO;
+import com.msi.easyventas.dtos.LoginRequestDTO;
 import com.msi.easyventas.models.Ciudad;
 import com.msi.easyventas.models.Empleado;
 import com.msi.easyventas.models.RolEmpleado;
@@ -45,7 +46,7 @@ public class EmpleadoService implements iEmpleadoService {
     @Override
     public void addEmpleado(EmpleadoRequestDTO empleadoRequestDTO) throws Exception {
 
-        if (empleadoRepository.existsByDocumento(empleadoRequestDTO.getDocumento()) || empleadoRequestDTO.getId_rol_empleado() == 1) {
+        if (empleadoRepository.existsByDocumento(empleadoRequestDTO.getDocumento())) {
             throw new Exception("El Vendedor ya existe o es Administrador.");
         } else {
             Ciudad ciudad = ciudadRepository.findById(empleadoRequestDTO.getId_ciudad()).orElseThrow();
@@ -64,6 +65,7 @@ public class EmpleadoService implements iEmpleadoService {
             empleado.setNombre(empleadoRequestDTO.getNombre());
             empleado.setDomicilio(empleadoRequestDTO.getDomicilio());
             empleado.setTipoDoc(tipoDoc);
+            empleado.setContraseña(empleadoRequestDTO.getContraseña());
 
             empleadoRepository.save(empleado);
         }
@@ -101,28 +103,64 @@ public class EmpleadoService implements iEmpleadoService {
     public void updateEmpleado(EmpleadoRequestDTO empleadoRequestDTO) throws Exception {
         if (empleadoRequestDTO.getDocumento() != 0) {
             List<Empleado> empleados = empleadoRepository.searchByDocumento(empleadoRequestDTO.getDocumento());
-            if (empleadoRepository.existsByDocumento(empleadoRequestDTO.getDocumento()) && empleadoRequestDTO.getId_rol_empleado() != 1) {
+            if (empleadoRepository.existsByDocumento(empleadoRequestDTO.getDocumento())) {
                 for (Empleado empleado : empleados) {
-                    Ciudad ciudad = ciudadRepository.findById(empleadoRequestDTO.getId_ciudad()).orElseThrow();
-                    TipoDoc tipoDoc = tipoDocRepository.findById(empleadoRequestDTO.getId_tipo_doc()).orElseThrow();
-                    RolEmpleado rolEmpleado = rolEmpleadoRepository.findById(empleadoRequestDTO.getId_rol_empleado()).orElseThrow();
+                    if (empleado.getRolEmpleado().getId() == 2) {
+                        Ciudad ciudad = ciudadRepository.findById(empleadoRequestDTO.getId_ciudad()).orElseThrow();
+                        TipoDoc tipoDoc = tipoDocRepository.findById(empleadoRequestDTO.getId_tipo_doc()).orElseThrow();
+                        RolEmpleado rolEmpleado = new RolEmpleado();
+                        rolEmpleado.setId(2);
 
-                    empleado.setDocumento(empleadoRequestDTO.getDocumento());
-                    empleado.setGenero(empleadoRequestDTO.getGenero());
-                    empleado.setRolEmpleado(rolEmpleado);
-                    empleado.setApellido(empleadoRequestDTO.getApellido());
-                    empleado.setCiudad(ciudad);
-                    empleado.setEstado(empleadoRequestDTO.getEstado());
-                    empleado.setNombre(empleadoRequestDTO.getNombre());
-                    empleado.setDomicilio(empleadoRequestDTO.getDomicilio());
-                    empleado.setTipoDoc(tipoDoc);
-                    empleadoRepository.save(empleado);
+                        empleado.setDocumento(empleadoRequestDTO.getDocumento());
+                        empleado.setGenero(empleadoRequestDTO.getGenero());
+                        empleado.setRolEmpleado(rolEmpleado);
+                        empleado.setApellido(empleadoRequestDTO.getApellido());
+                        empleado.setCiudad(ciudad);
+                        empleado.setEstado(empleadoRequestDTO.getEstado());
+                        empleado.setNombre(empleadoRequestDTO.getNombre());
+                        empleado.setDomicilio(empleadoRequestDTO.getDomicilio());
+                        empleado.setTipoDoc(tipoDoc);
+                        empleadoRepository.save(empleado);
+                    }
+                    else{
+                        throw new Exception("No existe el vendedor o es Administrador.");
+                    }
                 }
             } else {
-                throw new Exception("No existe el vendedor o es Administrador.");
+                throw new Exception("No existe el vendedor.");
             }
         } else {
             throw new Exception("No existe el vendedor. Se requiere el documento.");
         }
+    }
+
+    @Override
+    public void login(LoginRequestDTO loginRequestDTO) throws Exception {
+        boolean login = false;
+        List<Empleado> empleados = empleadoRepository.searchByDocumento(loginRequestDTO.getDocumentoLogin());
+        if (empleados.isEmpty()) {
+            throw new NotFoundException("No se encuentra.");
+        } else {
+            for (Empleado e : empleados) {
+                if (Objects.equals(e.getContraseña(), loginRequestDTO.getContraseña())) {
+                    login = true;
+                } else {
+                    throw new NotFoundException("Error al intentar loguearse.");
+                }
+            }
+        }
+    }
+
+    public boolean isAdministrador(LoginRequestDTO loginRequestDTO) {
+        boolean isAdminOrVendedor = false;
+        List<Empleado> empleados = empleadoRepository.searchByDocumento(loginRequestDTO.getDocumentoLogin());
+        for (Empleado e : empleados) {
+            if (e.getRolEmpleado().getId() == 1) {
+                isAdminOrVendedor = true;
+            } else {
+                isAdminOrVendedor = false;
+            }
+        }
+        return isAdminOrVendedor;
     }
 }

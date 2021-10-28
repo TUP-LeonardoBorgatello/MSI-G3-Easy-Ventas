@@ -28,7 +28,7 @@ public class ClienteController {
             try {
                 clienteService.addCliente(nuevoCliente);
             } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente ya existe");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente ya existe, o seleccione una ciudad y tipo de documento válido.");
             }
         }
         return ResponseEntity.status(HttpStatus.OK).body("Agregado con éxito");
@@ -54,7 +54,7 @@ public class ClienteController {
         try {
             clienteService.updateCliente(cliente);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontró el cliente con ese documento.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontró el cliente con ese documento o los valores iungresados no corresponden.");
         }
         return ResponseEntity.status(HttpStatus.OK).body("El cliente se modificó correctamente.");
     }

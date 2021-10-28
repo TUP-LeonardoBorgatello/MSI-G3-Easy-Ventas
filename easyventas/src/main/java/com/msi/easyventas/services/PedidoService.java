@@ -92,15 +92,15 @@ public class PedidoService implements iPedidoService {
     }
 
 
-    public void addDetallePedido(DetallePedidoRequestDTO detallePedidoRequestDTO) throws Exception {
+    public void addDetallePedido(PedidoRequestDTO detallePedidoRequestDTO) throws Exception {
 
         if (!productoRepository.existsById(detallePedidoRequestDTO.getId_producto())) {
             throw new NotFoundException("Alguno de los datos no existe. Verificar el pedido o poducto.");
         } else {
             Producto producto = productoRepository.findById(detallePedidoRequestDTO.getId_producto()).orElseThrow();
-            if (producto.getStock() > 0 && producto.getStock() > detallePedidoRequestDTO.getCantidad()) {
+            if (producto.getStock() >= 0 && producto.getStock() > detallePedidoRequestDTO.getCantidad()) {
                 long idPedido = pedidoRepository.lastPedidoId();
-                Pedido pedido = pedidoRepository.getById(idPedido);
+                Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow();
 
                 DetallePedido d = new DetallePedido();
 
