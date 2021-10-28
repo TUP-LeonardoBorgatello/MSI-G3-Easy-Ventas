@@ -22,6 +22,8 @@ public class Empleado {
     private int genero;
     @Column(nullable = false)
     private int documento;
+    @Column(nullable = false)
+    private String contraseña;
 
     @ManyToOne()
     @JoinColumn(name = "id_ciudad", nullable = false)
@@ -34,6 +36,14 @@ public class Empleado {
     @ManyToOne()
     @JoinColumn(name = "id_rol_empleado", nullable = false)
     private RolEmpleado rolEmpleado;
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String password) {
+        this.contraseña = password;
+    }
 
     public int getDocumento() {
         return documento;
@@ -115,13 +125,14 @@ public class Empleado {
         this.rolEmpleado = rolEmpleado;
     }
 
-    public Empleado(String nombre, String apellido, String domicilio, boolean estado, int genero, int documento, Ciudad ciudad, TipoDoc tipoDoc, RolEmpleado rolEmpleado) {
+    public Empleado(String nombre, String apellido, String domicilio, boolean estado, int genero, int documento, String contraseña, Ciudad ciudad, TipoDoc tipoDoc, RolEmpleado rolEmpleado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.domicilio = domicilio;
         this.estado = estado;
         this.genero = genero;
         this.documento = documento;
+        this.contraseña = contraseña;
         this.ciudad = ciudad;
         this.tipoDoc = tipoDoc;
         this.rolEmpleado = rolEmpleado;

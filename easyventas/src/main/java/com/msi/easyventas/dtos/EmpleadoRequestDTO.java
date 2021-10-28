@@ -8,9 +8,17 @@ public class EmpleadoRequestDTO {
     private Boolean estado;
     private long id_ciudad;
     private long id_tipo_doc;
-    private long id_rol_empleado;
     private int documento;
     private int genero;
+    private String contraseña;
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
 
     public String getNombre() {
         return nombre;
@@ -60,14 +68,6 @@ public class EmpleadoRequestDTO {
         this.id_tipo_doc = id_tipo_doc;
     }
 
-    public long getId_rol_empleado() {
-        return id_rol_empleado;
-    }
-
-    public void setId_rol_empleado(long id_rol_empleado) {
-        this.id_rol_empleado = id_rol_empleado;
-    }
-
     public int getDocumento() {
         return documento;
     }
@@ -84,16 +84,16 @@ public class EmpleadoRequestDTO {
         this.genero = genero;
     }
 
-    public EmpleadoRequestDTO(String nombre, String apellido, String domicilio, Boolean estado, long id_ciudad, long id_tipo_doc, long id_rol_empleado, int documento, int genero) {
+    public EmpleadoRequestDTO(String nombre, String apellido, String domicilio, Boolean estado, long id_ciudad, long id_tipo_doc, int documento, int genero, String contraseña) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.domicilio = domicilio;
         this.estado = estado;
         this.id_ciudad = id_ciudad;
         this.id_tipo_doc = id_tipo_doc;
-        this.id_rol_empleado = id_rol_empleado;
         this.documento = documento;
         this.genero = genero;
+        this.contraseña = contraseña;
     }
 
     public EmpleadoRequestDTO() {
