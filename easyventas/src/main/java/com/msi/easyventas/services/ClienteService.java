@@ -42,22 +42,23 @@ public class ClienteService implements iClienteService {
         if (clienteRepository.existsByDocumento(clienteRequestDTO.getDocumento())) {
             throw new Exception("El cliente ya existe.");
         }
+        else {
+            Ciudad ciudad = ciudadRepository.findById(clienteRequestDTO.getId_ciudad()).orElseThrow();
+            TipoDoc tipoDoc = tipoDocRepository.findById(clienteRequestDTO.getId_tipo_doc()).orElseThrow();
 
-        Ciudad ciudad = clienteRepository.findById(clienteRequestDTO.getId_ciudad()).orElseThrow().getCiudad();
-        TipoDoc tipoDoc = clienteRepository.findById(clienteRequestDTO.getId_tipo_doc()).orElseThrow().getTipoDoc();
+            Cliente c = new Cliente();
+            c.setNombre(clienteRequestDTO.getNombre());
+            c.setApellido(clienteRequestDTO.getApellido());
+            c.setDomicilio(clienteRequestDTO.getDomicilio());
+            c.setEmail(clienteRequestDTO.getEmail());
+            c.setEstado(clienteRequestDTO.getEstado());
+            c.setCiudad(ciudad);
+            c.setTipoDoc(tipoDoc);
+            c.setDocumento(clienteRequestDTO.getDocumento());
 
+            clienteRepository.save(c);
+        }
 
-        Cliente c = new Cliente();
-        c.setNombre(clienteRequestDTO.getNombre());
-        c.setApellido(clienteRequestDTO.getApellido());
-        c.setDomicilio(clienteRequestDTO.getDomicilio());
-        c.setEmail(clienteRequestDTO.getEmail());
-        c.setEstado(clienteRequestDTO.getEstado());
-        c.setCiudad(ciudad);
-        c.setTipoDoc(tipoDoc);
-        c.setDocumento(clienteRequestDTO.getDocumento());
-
-        clienteRepository.save(c);
     }
 
     @Override
@@ -68,7 +69,6 @@ public class ClienteService implements iClienteService {
                 throw new NotFoundException("El cliente no se encuentra en el sistema.");
             }
         }
-
         return clientes.stream().map(ClienteMapper::toDTO).collect(Collectors.toList());
     }
 

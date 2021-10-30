@@ -28,7 +28,7 @@ public class EmpleadoController {
             try {
                 empleadoService.addEmpleado(nuevoEmpleado);
             } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Empleado ya existe");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Empleado ya existe o se necesita verificar los datos ingresados.");
             }
         }
         return ResponseEntity.status(HttpStatus.OK).body("Agregado con éxito");

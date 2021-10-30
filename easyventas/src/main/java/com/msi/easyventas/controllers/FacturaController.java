@@ -21,14 +21,15 @@ public class FacturaController {
     }
 
     @PostMapping("/add/factura")
-    public ResponseEntity<?> addFactura(@RequestBody FacturaRequestDTO nuevaFactura) throws Exception {
+    public ResponseEntity<?> addFactura(@RequestBody FacturaRequestDTO nuevaFactura, @RequestParam long idPedido) throws Exception {
         if (nuevaFactura != null) {
             try {
-                facturaService.addFactura(nuevaFactura);
+                facturaService.addFactura(nuevaFactura, idPedido);
                 Thread.sleep(1000);
-                facturaService.addDetalleFactura();
+                facturaService.addDetalleFactura(idPedido);
             } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se puedo agregar la factura. Verifique los datos.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Alguno de los datos no existe. Verificar el" +
+                        " método de pago, la forma de entrega o si el pedido está cancelado.");
             }
         }
         return ResponseEntity.status(HttpStatus.OK).body("Factura cargada con éxito");

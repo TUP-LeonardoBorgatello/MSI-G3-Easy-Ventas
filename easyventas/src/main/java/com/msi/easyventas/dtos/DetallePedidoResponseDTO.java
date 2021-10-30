@@ -4,7 +4,7 @@ public class DetallePedidoResponseDTO {
 
     private String nombreProducto;
     private long cantidad;
-    private double precio;
+    private double precioUnitario;
 
     public String getNombreProducto() {
         return nombreProducto;
@@ -22,18 +22,18 @@ public class DetallePedidoResponseDTO {
         this.cantidad = cantidad;
     }
 
-    public double getPrecio() {
-        return precio;
+    public double getPrecioUnitario() {
+        return precioUnitario;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
-    public DetallePedidoResponseDTO(String nombreProducto, long cantidad, double precio) {
+    public DetallePedidoResponseDTO(String nombreProducto, long cantidad, double precioUnitario) {
         this.nombreProducto = nombreProducto;
         this.cantidad = cantidad;
-        this.precio = precio;
+        this.precioUnitario = precioUnitario;
     }
 
     public DetallePedidoResponseDTO() {
