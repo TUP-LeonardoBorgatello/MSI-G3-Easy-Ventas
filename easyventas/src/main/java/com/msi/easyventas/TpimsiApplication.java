@@ -6,9 +6,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+
 
 @SpringBootApplication
-public class TpimsiApplication {
+public class TpimsiApplication
+{
 
     public static void main(String[] args) {
         SpringApplication.run(TpimsiApplication.class, args);
