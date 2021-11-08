@@ -2,7 +2,10 @@ package com.msi.easyventas.controllers;
 
 import com.msi.easyventas.dtos.LoginRequestDTO;
 import com.msi.easyventas.services.EmpleadoService;
+import com.msi.easyventas.services.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +19,9 @@ public class LoginController {
     EmpleadoService empleadoService;
 
     @PostMapping("/empleados/login")
-    public String loginEmpleados(@RequestBody LoginRequestDTO loginEmpleado) throws Exception {
+    public ResponseEntity<?> loginEmpleados(@RequestBody LoginRequestDTO loginEmpleado) throws Exception {
         String mensaje;
+        ServiceResponse<?> response = new ServiceResponse<String>("error", "No se encontró el cliente con ese documento o los valores ingresados no corresponden");
         try {
             empleadoService.login(loginEmpleado);
             if (empleadoService.isAdministrador(loginEmpleado)) {
@@ -26,8 +30,8 @@ public class LoginController {
                 mensaje = "Vendedor logueado.";
             }
         } catch (Exception e) {
-            return "No se pudo realizar el login. Verificar contraseña y/o nombre de usuario.";
+            return new ResponseEntity<Object>(response, HttpStatus.BAD_REQUEST);
         }
-        return mensaje;
+        return  new ResponseEntity<Object>(new ServiceResponse<>("success", mensaje), HttpStatus.OK);
     }
 }

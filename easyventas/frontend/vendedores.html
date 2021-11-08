@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Easy</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="images/favicon-32x32.png" rel="icon">
+
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="assets/css/style.css" rel="stylesheet">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <a href="index.html"><img src="https://pbs.twimg.com/profile_images/1041684949911461888/Vb60OZq3_400x400.jpg"
+            alt="" class="img-fluid"></a>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="index.html">Inicio</a></li>
+          <li><a class="nav-link scrollto" href="#vendedores">Vendedores</a></li>
+          <li class="dropdown"><a href="#"><span><img src="images/user.png" class="ms-3 mx-auto">
+                Matias</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="login.html">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+    <section id="vendedores" class="about">
+      <h2 class="text-center">Vendedores</h2>
+
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-xl-4 col-sm-12 mb-3">
+            <input class="form-control" type="text" placeholder="Ingrese nombre del vendedor">
+          </div>
+
+          <div class="col-xl-3 col-sm-12 mb-3">
+            <select class="form-select">
+              <option value="">Seleccione una opción</option>
+            </select>
+          </div>
+
+          <div class="col-xl-3 col-sm-12 mb-3">
+            <select class="form-select">
+              <option value="">Seleccione una opción</option>
+            </select>
+          </div>
+
+          <div class="col-xl-2 col-sm-12 mb-3">
+            <button class="btn btn-outline-success form-control">Filtrar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mt-5 text-center">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Rol</th>
+              <th scope="col">Seleccionar</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="tdContainer">
+              <td>Mark</td>
+              <td>Administrador</td>
+              <td><label><input type="radio" class="form-check-input" name="radioVendedores"></td></label>
+            </tr>
+            <tr class="tdContainer">
+              <td>Jacob</td>
+              <td>Vendedor</td>
+              <td><label><input type="radio" class="form-check-input" name="radioVendedores"></td></label>
+            </tr>
+            <tr class="tdContainer">
+              <td>Larry</td>
+              <td>Vendedor</td>
+              <td><label><input type="radio" class="form-check-input" name="radioVendedores"></td></label>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+
+        <div class="row">
+          <div class="col-6">
+            <button id="btnModify" class="btn btn-primary form-control"
+              onclick="modificarVendedor();">Modificar</button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-danger form-control" onclick="deleteVendedor();">Dar de baja</button>
+          </div>
+        </div>
+
+        <div id="modifyContent" class="row modificarVendedorContent" style="display: none;">
+          <div id="modificarr" class="container">
+            <div class="col-12 mt-5">
+              <h4 class="mb-3">Nombre</h4>
+              <input type="text" id="txtNombre" class="form-control text-center">
+            </div>
+            <div class="col-12 mt-5">
+              <h4 class="mb-3">Apellido</h4>
+              <input type="text" id="txtApellido" class="form-control text-center">
+            </div>
+            <button class="btn btn-success form-control mt-4" onclick="guardarUpdateVendedor();">Guardar</button>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <h3>Easy</h3>
+            <p>Proyecto para el trabajo práctico de Metodología de Sistemas</p>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container footer-bottom clearfix">
+      <div class="copyright">
+        <strong><span>Easy</span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+
+
+  </script>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+
+  <script src="assets/js/main.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+
+
+  <script>
+    var nombre = document.getElementById('txtNombre');
+    var apellido = document.getElementById('txtApellido');
+
+    function modificarVendedor() {
+      $('.modificarVendedorContent').toggle();
+      let button = document.querySelector("#btnModify");
+      nombre.value = "";
+      apellido.value = "";
+    }
+
+    function guardarUpdateVendedor() {
+
+      if (nombre.value === "") {
+        swal('Advertencia', 'Debe ingresar un nombre', 'info');
+        return;
+      }
+
+      if (apellido.value === "") {
+        swal('Advertencia', 'Debe ingresar un apellido', 'info');
+        return;
+      }
+      else {
+        $('.modificarVendedorContent').hide();
+        let button = document.querySelector("#btnModify");
+        button.disabled = false;
+        nombre.value = "";
+        apellido.value = "";
+        swal('Datos cargados con éxito', 'Usuario actualizado', 'success');
+      }
+
+    }
+
+    function deleteVendedor() {
+      const tdContainerr = document.querySelectorAll('.tdContainer');
+      tdContainerr.forEach((addToTd) => {
+        addToTd.addEventListener('click', addToTd);
+      });
+
+      console.log(tdContainerr);
+
+      const tdContainer = document.querySelector('.tdContainer');
+      const tdRow = document.createElement('td');
+      const tdContent = `<td><button class="btn btn-danger buttonDelete" type="button">X</button></td>`;
+
+      tdRow.innerHTML = tdContent;
+      tdContainer.append(tdRow);
+    }
+
+  </script>
+
+</body>
+
+</html>
