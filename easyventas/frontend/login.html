@@ -129,11 +129,20 @@
 				contentType: "application/json",
 				data: JSON.stringify(comando),
 
-				success: function (data, textStatus, xhr) {
-					swal(xhr.status);
+				success: function (result) {
+					if (result.status === "success" && result.data === "Administrador logueado." ) {
+						alert("Administrador logueado con éxito")
+					}
+					if (result.status === "success" && result.data === "Vendedor logueado." ) {
+						alert("Vendedor logueado con éxito")
+					}
+					location.reload();
+
 				},
-				error: function (data, textStatus, xhr) {
-					swal(data.responseText);
+				error: function (e) {
+
+					alert("No se encontró el cliente con ese documento o los valores ingresados no corresponden")
+
 				}
 			})
 		}

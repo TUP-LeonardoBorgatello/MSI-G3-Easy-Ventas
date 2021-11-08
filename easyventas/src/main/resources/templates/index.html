@@ -114,7 +114,7 @@
 
 <script>
     var app = {
-        backend: 'http://localhost:8090/api/easyventas',
+        backend: 'http://localhost:8080/api/easyventas',
         table: null,
         init: function () {
             app.initDatatable('#clientes');
@@ -191,13 +191,16 @@
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
                 success: function (result) {
-                    if (result.status == "success") {
+                    if (result.status === "success") {
                         alert("Cliente actualizado con éxito")
                     }
+                    location.reload();
+
                 },
                 error: function (e) {
 
                     alert("No se encontró el cliente con ese documento o los valores ingresados no corresponden")
+
                 }
             })
         }
