@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,14 +15,8 @@ public class AuxService {
     @Autowired
     TipoDocRepository tipoDocRepository;
 
-    public List<String> findAllTipoDoc() {
+    public List<TipoDoc> findAllTipoDoc() {
         List<TipoDoc> tipoDocs = tipoDocRepository.findAll();
-        List<String> descripcionesTiposDocs = new ArrayList<>();
-        for (TipoDoc td : tipoDocs) {
-            TipoDoc nuevo = new TipoDoc();
-            nuevo.setDescripcion(td.getDescripcion());
-            descripcionesTiposDocs.add(nuevo.getDescripcion());
-        }
-        return descripcionesTiposDocs;
+        return tipoDocs;
     }
 }

@@ -75,8 +75,8 @@
                         </div>
                         <div class="form-group">
                             <label for="id_tipo_doc">Tipo de Documento</label>
-                            <input type="text" class="form-control" id="id_tipo_doc"
-                                   placeholder="Ingrese su tipo de documento">
+                            <select class="custom-select" name="cboTipoDocumento" id="cboTipoDocumento">
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="id_ciudad">ciudad</label>
@@ -120,12 +120,20 @@
             app.initDatatable('#clientes');
 
             $("#save").click(function () {
+                let combo = document.getElementById("cboTipoDocumento");
+                let selected = combo.options[combo.selectedIndex].text;
+                if (selected === "DNI"){
+                    selected = 1
+                }
+                if (selected === "PASAPORTE"){
+                    selected = 2
+                }
                 app.save({
                     nombre: $('#nombre').val(),
                     apellido: $('#apellido').val(),
                     domicilio: $('#domicilio').val(),
                     documento: $('#documento').val(),
-                    id_tipo_doc: $('#id_tipo_doc').val(),
+                    id_tipo_doc: selected,
                     id_ciudad: $('#id_ciudad').val(),
                     estado: $('#estado').val(),
                     email: $('#email').val()
@@ -209,6 +217,29 @@
     $(document).ready(function () {
         app.init();
     });
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/api/easyventas/tiposdocumentos",
+            type: "GET",
+            success: function (result) {
+                cargarCombo(result);
+            }
+        });
+    });
+
+    //combo clientes
+    function cargarCombo(datos) {
+        var html = "<option value=''>--</option>";
+        $("#cboTipoDocumento").append(html);
+        select = document.getElementById("cboTipoDocumento");
+        for (let i = 0; i < datos.length; i++) {
+            var option = document.createElement('option');
+            option.value = datos[i].id_tipo_doc;
+            option.text = datos[i].descripcion;
+            select.add(option);
+        }
+    }
 </script>
 </body>
 
