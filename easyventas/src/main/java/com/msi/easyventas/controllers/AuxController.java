@@ -1,5 +1,6 @@
 package com.msi.easyventas.controllers;
 
+import com.msi.easyventas.models.TipoDoc;
 import com.msi.easyventas.services.AuxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +18,7 @@ public class AuxController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/tiposdocumentos")
-    public List<String> getAllTipoDoc() {
+    public List<TipoDoc> getAllTipoDoc() {
         return auxService.findAllTipoDoc();
     }
 }
