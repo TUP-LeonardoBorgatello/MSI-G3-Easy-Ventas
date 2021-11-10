@@ -78,7 +78,7 @@ public class PedidoService implements iPedidoService {
             Empleado empleado = empleadoRepository.searchByDocumento(pedidoRequestDTO.getDocumentoEmpleado());
 
             Estado estado = new Estado();
-            estado.setIdEstado(2);
+            estado.setIdEstado(1);
 
             Pedido p = new Pedido();
 
@@ -97,35 +97,35 @@ public class PedidoService implements iPedidoService {
 
     public void addDetallePedido(PedidoRequestDTO detallePedidoRequestDTO) throws Exception {
 
-        if (!productoRepository.existsById(detallePedidoRequestDTO.getId_producto())) {
-            throw new NotFoundException("Alguno de los datos no existe. Verificar el pedido o poducto.");
+        Producto producto = productoRepository.searchBySKU(detallePedidoRequestDTO.getSku());
+        if (producto.getStock() >= 0 && producto.getStock() > detallePedidoRequestDTO.getCantidad()) {
+            long idPedido = pedidoRepository.lastPedidoId();
+            Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow();
+
+            DetallePedido d = new DetallePedido();
+
+            d.setPedido(pedido);
+            d.setCantidad(detallePedidoRequestDTO.getCantidad());
+            d.setProducto(producto);
+
+            detallePedidoRepository.save(d);
         } else {
-            Producto producto = productoRepository.findById(detallePedidoRequestDTO.getId_producto()).orElseThrow();
-            if (producto.getStock() >= 0 && producto.getStock() > detallePedidoRequestDTO.getCantidad()) {
-                long idPedido = pedidoRepository.lastPedidoId();
-                Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow();
-
-                DetallePedido d = new DetallePedido();
-
-                d.setPedido(pedido);
-                d.setCantidad(detallePedidoRequestDTO.getCantidad());
-                d.setProducto(producto);
-
-                detallePedidoRepository.save(d);
-            } else {
-                throw new NotFoundException("El producto no tiene stock.");
-            }
-
+            throw new NotFoundException("El producto no tiene stock.");
         }
     }
 
     public void deletePedido(PedidoDeleteRequestDTO pedidoDelete) throws Exception {
 
         List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(pedidoDelete.getId_pedido());
+        Pedido pedido = pedidoRepository.findById(pedidoDelete.getId_pedido()).orElseThrow();
         if (detallePedidos.isEmpty()) {
             pedidoRepository.deleteById(pedidoDelete.getId_pedido());
         } else {
-            pedidoRepository.updatePedidoCanceledStatus(pedidoDelete.getId_pedido());
+            if (pedido.getEstado().getIdEstado() == 1) {
+                pedidoRepository.updatePedidoCanceledStatus(pedidoDelete.getId_pedido());
+            } else {
+                throw new Exception("El pedido está finalizado o cancelado");
+            }
         }
     }
 
