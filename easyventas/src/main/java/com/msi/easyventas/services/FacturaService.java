@@ -90,7 +90,7 @@ public class FacturaService implements iFacturaService {
         List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(idPedido);
         Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow();
         if (detallePedidos.isEmpty() || !metodoEntregaRepository.existsById(facturaRequestDTO.getId_forma_entrega())
-                || !metodoPagoRepository.existsById(facturaRequestDTO.getId_metodo_pago()) || pedido.getEstado().getIdEstado() == 4) {
+                || !metodoPagoRepository.existsById(facturaRequestDTO.getId_metodo_pago()) || pedido.getEstado().getIdEstado() != 1) {
             throw new NotFoundException("Alguno de los datos no existe. Verificar el método de pago o la forma de entrega o si el pedido est{a cancelado.");
         } else {
             FormaEntrega formaEntrega = metodoEntregaRepository.findById(facturaRequestDTO.getId_forma_entrega()).orElseThrow();

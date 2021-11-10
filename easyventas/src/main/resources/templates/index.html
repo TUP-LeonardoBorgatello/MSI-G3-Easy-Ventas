@@ -232,7 +232,7 @@
     function cargarCombo(datos) {
         var html = "<option value=''>--</option>";
         $("#cboTipoDocumento").append(html);
-        select = document.getElementById("cboTipoDocumento");
+        let select = document.getElementById("cboTipoDocumento");
         for (let i = 0; i < datos.length; i++) {
             var option = document.createElement('option');
             option.value = datos[i].id_tipo_doc;

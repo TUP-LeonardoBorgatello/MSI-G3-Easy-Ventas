@@ -18,10 +18,15 @@ public class ProductoServicie
     @Autowired
     private iProductoRepository productoRepository;
 
-    public List<ProductoResponseDTO> findAllProductos()
+    public List<ProductoResponseDTO> findAllProductosSinId()
     {
         List<Producto> productos = productoRepository.findAll();
         return productos.stream().map(ProductoMapper::toDTO).collect(Collectors.toList());
+    }
+
+    public List<Producto> findAllProductos()
+    {
+        return productoRepository.findAll();
     }
 
 }

@@ -8,14 +8,14 @@ public class PedidoRequestDTO {
     private int documentoCliente;
     private int documentoEmpleado;
     private long cantidad;
-    private long id_producto;
+    private int sku;
 
-    public PedidoRequestDTO(LocalDate fecha_pedido, int documentoCliente, int documentoEmpleado, long cantidad, long id_producto) {
+    public PedidoRequestDTO(LocalDate fecha_pedido, int documentoCliente, int documentoEmpleado, long cantidad, int sku) {
         this.fecha_pedido = fecha_pedido;
         this.documentoCliente = documentoCliente;
         this.documentoEmpleado = documentoEmpleado;
         this.cantidad = cantidad;
-        this.id_producto = id_producto;
+        this.sku = sku;
     }
 
     public PedidoRequestDTO() {
@@ -29,12 +29,12 @@ public class PedidoRequestDTO {
         this.cantidad = cantidad;
     }
 
-    public long getId_producto() {
-        return id_producto;
+    public int getSku() {
+        return sku;
     }
 
-    public void setId_producto(long id_producto) {
-        this.id_producto = id_producto;
+    public void setSku(int sku) {
+        this.sku = sku;
     }
 
     public LocalDate getFecha_pedido() {
