@@ -1,7 +1,6 @@
 package com.msi.easyventas.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "roles_empleado")
@@ -13,17 +12,6 @@ public class RolEmpleado {
     private long id;
     @Column(length = 50, nullable = false)
     private String descripcion;
-
-    @OneToMany(mappedBy = "rolEmpleado")
-    private List<Empleado> empleados;
-
-    public List<Empleado> getEmpleados() {
-        return empleados;
-    }
-
-    public void setEmpleados(List<Empleado> empleados) {
-        this.empleados = empleados;
-    }
 
     public long getId() {
         return id;

@@ -53,7 +53,7 @@ public class Empleado {
         this.documento = documento;
     }
 
-    public long getGenero() {
+    public int getGenero() {
         return genero;
     }
 

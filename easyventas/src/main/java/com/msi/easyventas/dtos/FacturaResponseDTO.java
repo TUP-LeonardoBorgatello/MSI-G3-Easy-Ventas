@@ -1,12 +1,13 @@
 package com.msi.easyventas.dtos;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 public class FacturaResponseDTO {
 
     private long id_factura;
-    private Date fechaFactura;
+    private LocalDate fechaFactura;
     private String formaEntrega;
     private String metodoPago;
     private String nombreCliente;
@@ -16,7 +17,7 @@ public class FacturaResponseDTO {
     private List<DetallePedidoResponseDTO> detalles;
     private double montoTotal;
 
-    public FacturaResponseDTO(long id_factura, Date fechaFactura, String formaEntrega, String metodoPago,
+    public FacturaResponseDTO(long id_factura, LocalDate fechaFactura, String formaEntrega, String metodoPago,
                               String nombreCliente, String apellidoCliente, int documento, String domicilio,
                               List<DetallePedidoResponseDTO> detalles, double montoTotal) {
         this.id_factura = id_factura;
@@ -42,11 +43,11 @@ public class FacturaResponseDTO {
         this.id_factura = id_factura;
     }
 
-    public Date getFechaFactura() {
+    public LocalDate getFechaFactura() {
         return fechaFactura;
     }
 
-    public void setFechaFactura(Date fechaFactura) {
+    public void setFechaFactura(LocalDate fechaFactura) {
         this.fechaFactura = fechaFactura;
     }
 
