@@ -1,6 +1,5 @@
 package com.msi.easyventas.services;
 
-import com.msi.easyventas.dtos.DetallePedidoRequestDTO;
 import com.msi.easyventas.dtos.PedidoDeleteRequestDTO;
 import com.msi.easyventas.dtos.PedidoRequestDTO;
 import com.msi.easyventas.dtos.PedidoResponseDTO;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,18 +70,21 @@ public class PedidoService implements iPedidoService {
     @Override
     public void addPedido(PedidoRequestDTO pedidoRequestDTO) throws Exception {
 
-        if (!clienteRepository.existsById(pedidoRequestDTO.getId_cliente())
-                || !empleadoRepository.existsById(pedidoRequestDTO.getId_empleado())) {
+        if (!clienteRepository.existsByDocumento(pedidoRequestDTO.getDocumentoCliente())
+                || !empleadoRepository.existsByDocumento(pedidoRequestDTO.getDocumentoEmpleado())) {
             throw new NotFoundException("Alguno de los datos no existe. Verificar el cliente, empleado o estado.");
         } else {
-            Cliente cliente = clienteRepository.findById(pedidoRequestDTO.getId_cliente()).orElseThrow();
-            Empleado empleado = empleadoRepository.findById(pedidoRequestDTO.getId_empleado()).orElseThrow();
+            Cliente cliente = clienteRepository.searchByDocumento1(pedidoRequestDTO.getDocumentoCliente());
+            Empleado empleado = empleadoRepository.searchByDocumento(pedidoRequestDTO.getDocumentoEmpleado());
+
             Estado estado = new Estado();
             estado.setIdEstado(2);
 
             Pedido p = new Pedido();
 
-            p.setFechaPedido(pedidoRequestDTO.getFecha_pedido());
+            LocalDate fecha = LocalDate.now();
+
+            p.setFechaPedido(fecha);
             p.setCliente(cliente);
             p.setEmpleado(empleado);
             p.setEstado(estado);

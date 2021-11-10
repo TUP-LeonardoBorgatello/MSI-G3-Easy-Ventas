@@ -1,6 +1,7 @@
 package com.msi.easyventas.models;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Factura {
     @Column(name = "id_factura", length = 10)
     private long idFactura;
     @Column(nullable = false)
-    private Date fecha;
+    private LocalDate fecha;
 
     @ManyToOne()
     @JoinColumn(name = "id_metodo_pago", nullable = false)
@@ -24,7 +25,7 @@ public class Factura {
     private FormaEntrega formaEntrega;
 
 
-    public Factura(Date fecha, MetodoPago metodoPago, FormaEntrega formaEntrega) {
+    public Factura(LocalDate fecha, MetodoPago metodoPago, FormaEntrega formaEntrega) {
         this.fecha = fecha;
         this.metodoPago = metodoPago;
         this.formaEntrega = formaEntrega;
@@ -42,11 +43,11 @@ public class Factura {
         this.idFactura = idFactura;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
