@@ -27,6 +27,12 @@ public class ClienteController {
     }
 
     @CrossOrigin(origins = "*")
+    @GetMapping("/clientesconid")
+    public List<Cliente> getAllClientesConID() {
+        return clienteService.findAllClientesConId();
+    }
+
+    @CrossOrigin(origins = "*")
     @PostMapping("/add/cliente")
     public ResponseEntity<?> addCliente(@RequestBody ClienteRequestDTO nuevoCliente) throws Exception {
         ServiceResponse<?> response = new ServiceResponse<>("success", "Se agregó correctamente el cliente.");

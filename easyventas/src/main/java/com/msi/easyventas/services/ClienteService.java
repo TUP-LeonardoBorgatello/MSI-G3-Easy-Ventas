@@ -36,6 +36,10 @@ public class ClienteService implements iClienteService {
         return clientes.stream().map(ClienteMapper::toDTO).collect(Collectors.toList());
     }
 
+    public List<Cliente> findAllClientesConId() {
+        return clienteRepository.findAll();
+    }
+
     @Override
     public void addCliente(ClienteRequestDTO clienteRequestDTO) throws Exception {
 
