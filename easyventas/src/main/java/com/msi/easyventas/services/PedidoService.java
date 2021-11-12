@@ -103,14 +103,18 @@ public class PedidoService implements iPedidoService {
                 detallePedidoRequestDTO.getCantidad() > 0) {
             long idPedido = pedidoRepository.lastPedidoId();
             Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow();
+            if (pedido.getEstado().getIdEstado() == 1){
+                DetallePedido d = new DetallePedido();
 
-            DetallePedido d = new DetallePedido();
+                d.setPedido(pedido);
+                d.setCantidad(detallePedidoRequestDTO.getCantidad());
+                d.setProducto(producto);
 
-            d.setPedido(pedido);
-            d.setCantidad(detallePedidoRequestDTO.getCantidad());
-            d.setProducto(producto);
-
-            detallePedidoRepository.save(d);
+                detallePedidoRepository.save(d);
+            }
+            else {
+                throw new NotFoundException("El pedido esta finalizado o cancelado.");
+            }
         } else {
             throw new NotFoundException("El producto no tiene stock.");
         }
