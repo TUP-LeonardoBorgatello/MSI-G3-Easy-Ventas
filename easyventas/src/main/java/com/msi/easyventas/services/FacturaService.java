@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -75,7 +74,7 @@ public class FacturaService implements iFacturaService {
         return facturaResponseDTO;
     }
 
-    public List<DetallePedidoResponseDTO> getDetallesFactura(long idPedido){
+    public List<DetallePedidoResponseDTO> getDetallesFactura(long idPedido) {
         long idFactura = facturaRepository.lastFacturaId();
         Factura factura = facturaRepository.findById(idFactura).orElseThrow();
         List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(idPedido);
@@ -118,26 +117,30 @@ public class FacturaService implements iFacturaService {
 
     @Override
     public void addDetalleFactura(FacturaRequestDTO facturaRequestDTO) throws Exception {
-        Pedido pedido= pedidoRepository.findById(facturaRequestDTO.getIdPedido()).orElseThrow();
+        Pedido pedido = pedidoRepository.findById(facturaRequestDTO.getIdPedido()).orElseThrow();
         List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(facturaRequestDTO.getIdPedido());
-        double montoTotal = 0;
-        long nuevoStock;
-        long idFactura = facturaRepository.lastFacturaId();
-        Factura factura = facturaRepository.findById(idFactura).orElseThrow();
+        if (detallePedidos.isEmpty() || pedido.getEstado().getIdEstado() != 1) {
+            throw new NotFoundException("Alguno de los datos no existe. Verificar el método de pago o la forma de entrega o si el pedido est{a cancelado.");
+        } else {
+            double montoTotal = 0;
+            long nuevoStock;
+            long idFactura = facturaRepository.lastFacturaId();
+            Factura factura = facturaRepository.findById(idFactura).orElseThrow();
 
-        for (DetallePedido d : detallePedidos) {
-            montoTotal += d.getProducto().getPrecioVenta() * d.getCantidad();
-            nuevoStock = d.getProducto().getStock() - d.getCantidad();
-            productoRepository.updateProductoStock(nuevoStock, d.getProducto().getIdProducto());
+            for (DetallePedido d : detallePedidos) {
+                montoTotal += d.getProducto().getPrecioVenta() * d.getCantidad();
+                nuevoStock = d.getProducto().getStock() - d.getCantidad();
+                productoRepository.updateProductoStock(nuevoStock, d.getProducto().getIdProducto());
+            }
+
+            DetalleFactura d = new DetalleFactura();
+            d.setFactura(factura);
+            d.setMonto(montoTotal);
+            d.setPedido(pedido);
+
+            detalleFacturaRepository.save(d);
+            pedidoRepository.updatePedidoFinishedStatus(facturaRequestDTO.getIdPedido());
         }
-
-        DetalleFactura d = new DetalleFactura();
-        d.setFactura(factura);
-        d.setMonto(montoTotal);
-        d.setPedido(pedido);
-
-        detalleFacturaRepository.save(d);
-        pedidoRepository.updatePedidoFinishedStatus(facturaRequestDTO.getIdPedido());
 
 
     }
