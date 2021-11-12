@@ -98,7 +98,9 @@ public class PedidoService implements iPedidoService {
     public void addDetallePedido(PedidoRequestDTO detallePedidoRequestDTO) throws Exception {
 
         Producto producto = productoRepository.searchBySKU(detallePedidoRequestDTO.getSku());
-        if (producto.getStock() >= 0 && producto.getStock() > detallePedidoRequestDTO.getCantidad()) {
+        if (producto.getStock() >= 0 &&
+                producto.getStock() > detallePedidoRequestDTO.getCantidad() &&
+                detallePedidoRequestDTO.getCantidad() > 0) {
             long idPedido = pedidoRepository.lastPedidoId();
             Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow();
 
