@@ -164,8 +164,10 @@
                         text: 'Editar',
                         action: function (e, dt, node, config) {
                             console.log(e);
+                            console.log(dt);
                             var data = dt.rows('.table-active').data()[0];
                             app.setDataToModal(data);
+                            console.log(data)
                             $('#clienteModal').modal();
                         }
                     }
