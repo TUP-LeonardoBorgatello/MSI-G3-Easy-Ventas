@@ -20,13 +20,13 @@ public class FacturaController {
     FacturaService facturaService;
 
     @GetMapping("/factura")
-    public FacturaResponseDTO getFactura(@RequestParam long idPedido) {
-        return facturaService.Factura(idPedido);
+    public FacturaResponseDTO getFactura(@RequestBody FacturaRequestDTO nuevaFactura) {
+        return facturaService.Factura(nuevaFactura);
     }
 
     @GetMapping("/detalle/factura")
-    public List<DetallePedidoResponseDTO> getDetallesFactura(@RequestParam long idPedido) {
-        return facturaService.getDetallesFactura(idPedido);
+    public List<DetallePedidoResponseDTO> getDetallesFactura(@RequestBody FacturaRequestDTO nuevaFactura) {
+        return facturaService.getDetallesFactura(nuevaFactura);
     }
 
     @PostMapping("/add/factura")
