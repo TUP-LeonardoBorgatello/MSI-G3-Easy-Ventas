@@ -10,9 +10,9 @@ public interface iFacturaService {
 
     FacturaResponseDTO Factura(long idPedido) throws Exception;
 
-    void addFactura(FacturaRequestDTO facturaRequestDTO, long idPedido) throws Exception;
+    void addFactura(FacturaRequestDTO facturaRequestDTO) throws Exception;
 
-    void addDetalleFactura(long idPedido) throws Exception;
+    void addDetalleFactura(FacturaRequestDTO facturaRequestDTO) throws Exception;
 
      List<DetallePedidoResponseDTO> getDetallesFactura(long idPedido);
 
