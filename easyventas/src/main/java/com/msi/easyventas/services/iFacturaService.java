@@ -8,12 +8,12 @@ import java.util.List;
 
 public interface iFacturaService {
 
-    FacturaResponseDTO Factura(long idPedido) throws Exception;
+    FacturaResponseDTO Factura(FacturaRequestDTO facturaRequestDTO) throws Exception;
 
     void addFactura(FacturaRequestDTO facturaRequestDTO) throws Exception;
 
     void addDetalleFactura(FacturaRequestDTO facturaRequestDTO) throws Exception;
 
-     List<DetallePedidoResponseDTO> getDetallesFactura(long idPedido);
+     List<DetallePedidoResponseDTO> getDetallesFactura(FacturaRequestDTO nuevaFactura);
 
 }

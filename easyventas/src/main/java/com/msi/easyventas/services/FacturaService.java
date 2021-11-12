@@ -49,10 +49,10 @@ public class FacturaService implements iFacturaService {
     DetalleFacturaRepository detalleFacturaRepository;
 
     @Override
-    public FacturaResponseDTO Factura(long idPedido) {
+    public FacturaResponseDTO Factura(FacturaRequestDTO nuevaFactura) {
         long idFactura = facturaRepository.lastFacturaId();
         Factura factura = facturaRepository.findById(idFactura).orElseThrow();
-        List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(idPedido);
+        List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(nuevaFactura.getIdPedido());
         FacturaResponseDTO facturaResponseDTO = new FacturaResponseDTO();
         double montoTotal = 0;
 
@@ -62,7 +62,7 @@ public class FacturaService implements iFacturaService {
 
         facturaResponseDTO.setId_factura(factura.getIdFactura());
         facturaResponseDTO.setFechaFactura(factura.getFecha());
-        Pedido pedido = pedidoRepository.getById(idPedido);
+        Pedido pedido = pedidoRepository.getById(nuevaFactura.getIdPedido());
         facturaResponseDTO.setDocumento(pedido.getCliente().getDocumento());
         facturaResponseDTO.setApellidoCliente(pedido.getCliente().getApellido());
         facturaResponseDTO.setNombreCliente(pedido.getCliente().getNombre());
@@ -74,10 +74,9 @@ public class FacturaService implements iFacturaService {
         return facturaResponseDTO;
     }
 
-    public List<DetallePedidoResponseDTO> getDetallesFactura(long idPedido) {
-        long idFactura = facturaRepository.lastFacturaId();
-        Factura factura = facturaRepository.findById(idFactura).orElseThrow();
-        List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(idPedido);
+    @Override
+    public List<DetallePedidoResponseDTO> getDetallesFactura(FacturaRequestDTO nuevaFactura) {
+        List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(nuevaFactura.getIdPedido());
         List<DetallePedidoResponseDTO> listaDetalles = new ArrayList<>();
 
         for (DetallePedido d : detallePedidos) {
@@ -88,7 +87,6 @@ public class FacturaService implements iFacturaService {
 
             listaDetalles.add(detalles);
         }
-
         return listaDetalles;
     }
 
