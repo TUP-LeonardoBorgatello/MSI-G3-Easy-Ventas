@@ -50,26 +50,17 @@ public class FacturaService implements iFacturaService {
     DetalleFacturaRepository detalleFacturaRepository;
 
     @Override
-    public FacturaResponseDTO Factura() {
+    public FacturaResponseDTO Factura(long idPedido) {
         long idFactura = facturaRepository.lastFacturaId();
         Factura factura = facturaRepository.findById(idFactura).orElseThrow();
-        long idPedido = pedidoRepository.lastPedidoId();
         List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(idPedido);
         FacturaResponseDTO facturaResponseDTO = new FacturaResponseDTO();
-        List<DetallePedidoResponseDTO> listaDetalles = new ArrayList<>();
         double montoTotal = 0;
 
         for (DetallePedido d : detallePedidos) {
-            DetallePedidoResponseDTO detalles = new DetallePedidoResponseDTO();
-            detalles.setNombreProducto(d.getProducto().getDescripcion());
-            detalles.setCantidad(d.getCantidad());
-            detalles.setPrecioUnitario(d.getProducto().getPrecioVenta());
             montoTotal += d.getProducto().getPrecioVenta() * d.getCantidad();
-
-            listaDetalles.add(detalles);
         }
 
-        facturaResponseDTO.setDetalles(listaDetalles);
         facturaResponseDTO.setId_factura(factura.getIdFactura());
         facturaResponseDTO.setFechaFactura(factura.getFecha());
         Pedido pedido = pedidoRepository.getById(idPedido);
@@ -82,6 +73,24 @@ public class FacturaService implements iFacturaService {
         facturaResponseDTO.setMontoTotal(montoTotal);
 
         return facturaResponseDTO;
+    }
+
+    public List<DetallePedidoResponseDTO> getDetallesFactura(long idPedido){
+        long idFactura = facturaRepository.lastFacturaId();
+        Factura factura = facturaRepository.findById(idFactura).orElseThrow();
+        List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(idPedido);
+        List<DetallePedidoResponseDTO> listaDetalles = new ArrayList<>();
+
+        for (DetallePedido d : detallePedidos) {
+            DetallePedidoResponseDTO detalles = new DetallePedidoResponseDTO();
+            detalles.setNombreProducto(d.getProducto().getDescripcion());
+            detalles.setCantidad(d.getCantidad());
+            detalles.setPrecioUnitario(d.getProducto().getPrecioVenta());
+
+            listaDetalles.add(detalles);
+        }
+
+        return listaDetalles;
     }
 
     @Override

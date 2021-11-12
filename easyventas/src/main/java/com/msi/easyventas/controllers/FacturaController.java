@@ -1,5 +1,6 @@
 package com.msi.easyventas.controllers;
 
+import com.msi.easyventas.dtos.DetallePedidoResponseDTO;
 import com.msi.easyventas.dtos.FacturaRequestDTO;
 import com.msi.easyventas.dtos.FacturaResponseDTO;
 import com.msi.easyventas.services.FacturaService;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/easyventas")
@@ -16,8 +19,13 @@ public class FacturaController {
     FacturaService facturaService;
 
     @GetMapping("/factura")
-    public FacturaResponseDTO getFactura() {
-        return facturaService.Factura();
+    public FacturaResponseDTO getFactura(@RequestParam long idPedido) {
+        return facturaService.Factura(idPedido);
+    }
+
+    @GetMapping("/detalle/factura")
+    public List<DetallePedidoResponseDTO> getDetallesFactura(@RequestParam long idPedido) {
+        return facturaService.getDetallesFactura(idPedido);
     }
 
     @PostMapping("/add/factura")
