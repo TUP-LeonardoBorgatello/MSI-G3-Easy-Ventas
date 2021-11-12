@@ -1,8 +1,6 @@
 package com.msi.easyventas.controllers;
 
-import com.msi.easyventas.models.Ciudad;
-import com.msi.easyventas.models.Empleado;
-import com.msi.easyventas.models.TipoDoc;
+import com.msi.easyventas.models.*;
 import com.msi.easyventas.services.AuxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,7 +22,6 @@ public class AuxController {
         return auxService.findAllTipoDoc();
     }
 
-
     @CrossOrigin(origins = "*")
     @GetMapping("/ciudades")
     public List<Ciudad> getAllCiudad() {
@@ -35,5 +32,17 @@ public class AuxController {
     @GetMapping("/empleadoconid")
     public List<Empleado> getAllEmpleadoWithId() {
         return auxService.findAllEmpleadosWithId();
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/formaentrega")
+    public List<FormaEntrega> getAllFormaEntrega() {
+        return auxService.findAllFormaEntrega();
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/metodopago")
+    public List<MetodoPago> getAllMetodoPago() {
+        return auxService.findAllMetodoPago();
     }
 }

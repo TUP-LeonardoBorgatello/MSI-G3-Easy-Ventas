@@ -1,7 +1,6 @@
 package com.msi.easyventas.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "formas_entrega")
@@ -14,8 +13,6 @@ public class FormaEntrega {
     @Column(length = 50, nullable = false)
     private String descripcion;
 
-    @OneToMany(mappedBy = "formaEntrega")
-    private List<Factura> facturas;
 
     public long getIdFormaEntrega() {
         return idFormaEntrega;
@@ -33,17 +30,8 @@ public class FormaEntrega {
         this.descripcion = descripcion;
     }
 
-    public List<Factura> getFacturas() {
-        return facturas;
-    }
-
-    public void setFacturas(List<Factura> facturas) {
-        this.facturas = facturas;
-    }
-
-    public FormaEntrega(String descripcion, List<Factura> facturas) {
+    public FormaEntrega(String descripcion) {
         this.descripcion = descripcion;
-        this.facturas = facturas;
     }
 
     public FormaEntrega() {
