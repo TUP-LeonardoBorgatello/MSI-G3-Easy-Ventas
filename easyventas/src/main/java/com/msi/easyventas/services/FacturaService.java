@@ -94,10 +94,10 @@ public class FacturaService implements iFacturaService {
     }
 
     @Override
-    public void addFactura(FacturaRequestDTO facturaRequestDTO, long idPedido) throws Exception {
+    public void addFactura(FacturaRequestDTO facturaRequestDTO) throws Exception {
 
-        List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(idPedido);
-        Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow();
+        List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(facturaRequestDTO.getIdPedido());
+        Pedido pedido = pedidoRepository.findById(facturaRequestDTO.getIdPedido()).orElseThrow();
         if (detallePedidos.isEmpty() || !metodoEntregaRepository.existsById(facturaRequestDTO.getId_forma_entrega())
                 || !metodoPagoRepository.existsById(facturaRequestDTO.getId_metodo_pago()) || pedido.getEstado().getIdEstado() != 1) {
             throw new NotFoundException("Alguno de los datos no existe. Verificar el método de pago o la forma de entrega o si el pedido est{a cancelado.");
@@ -117,9 +117,9 @@ public class FacturaService implements iFacturaService {
     }
 
     @Override
-    public void addDetalleFactura(long idPedido) throws Exception {
-        Pedido pedido= pedidoRepository.findById(idPedido).orElseThrow();
-        List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(idPedido);
+    public void addDetalleFactura(FacturaRequestDTO facturaRequestDTO) throws Exception {
+        Pedido pedido= pedidoRepository.findById(facturaRequestDTO.getIdPedido()).orElseThrow();
+        List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(facturaRequestDTO.getIdPedido());
         double montoTotal = 0;
         long nuevoStock;
         long idFactura = facturaRepository.lastFacturaId();
@@ -137,7 +137,7 @@ public class FacturaService implements iFacturaService {
         d.setPedido(pedido);
 
         detalleFacturaRepository.save(d);
-        pedidoRepository.updatePedidoFinishedStatus(idPedido);
+        pedidoRepository.updatePedidoFinishedStatus(facturaRequestDTO.getIdPedido());
 
 
     }

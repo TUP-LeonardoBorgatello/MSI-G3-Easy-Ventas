@@ -29,12 +29,12 @@ public class FacturaController {
     }
 
     @PostMapping("/add/factura")
-    public ResponseEntity<?> addFactura(@RequestBody FacturaRequestDTO nuevaFactura, @RequestParam long idPedido) throws Exception {
+    public ResponseEntity<?> addFactura(@RequestBody FacturaRequestDTO nuevaFactura) throws Exception {
         if (nuevaFactura != null) {
             try {
-                facturaService.addFactura(nuevaFactura, idPedido);
+                facturaService.addFactura(nuevaFactura);
                 Thread.sleep(1000);
-                facturaService.addDetalleFactura(idPedido);
+                facturaService.addDetalleFactura(nuevaFactura);
             } catch (Exception e) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Alguno de los datos no existe. Verificar el" +
                         " método de pago, la forma de entrega o si el pedido está cancelado.");

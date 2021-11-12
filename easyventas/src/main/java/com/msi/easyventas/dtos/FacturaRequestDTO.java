@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class FacturaRequestDTO {
 
+    private long idPedido;
     private Date fecha;
     private long id_forma_entrega;
     private long id_metodo_pago;
@@ -16,6 +17,14 @@ public class FacturaRequestDTO {
         this.fecha = fecha;
         this.id_forma_entrega = id_forma_entrega;
         this.id_metodo_pago = id_metodo_pago;
+    }
+
+    public long getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(long idPedido) {
+        this.idPedido = idPedido;
     }
 
     public Date getFecha() {
