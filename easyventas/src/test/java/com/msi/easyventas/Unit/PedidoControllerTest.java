@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
-import java.time.LocalDate;
 
 
 public class PedidoControllerTest {
@@ -17,13 +16,13 @@ public class PedidoControllerTest {
 
     @Test
     void addPedidoThrowExceptionByNullParams() throws Exception {
-        LocalDate date = LocalDate.parse("2021-02-20");
+        //LocalDate date = LocalDate.parse("2021-02-20");
+
         PedidoRequestDTO pedidoRequestDTO = new PedidoRequestDTO();
         pedidoRequestDTO.setCantidad(50);
         pedidoRequestDTO.setDocumentoCliente(3215);
         pedidoRequestDTO.setFecha_pedido(null);
 
         Assertions.assertThrows(Exception.class, () -> controller.addPedido(pedidoRequestDTO));
-
     }
 }

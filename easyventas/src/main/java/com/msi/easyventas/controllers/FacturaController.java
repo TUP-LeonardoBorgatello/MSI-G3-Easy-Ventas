@@ -19,14 +19,14 @@ public class FacturaController {
     @Autowired
     FacturaService facturaService;
 
-    @GetMapping("/factura")
-    public FacturaResponseDTO getFactura(@RequestBody FacturaRequestDTO nuevaFactura) {
-        return facturaService.Factura(nuevaFactura);
+    @GetMapping("/factura/{idPedido}")
+    public FacturaResponseDTO getFactura(@PathVariable long idPedido) {
+        return facturaService.Factura(idPedido);
     }
 
-    @GetMapping("/detalle/factura")
-    public List<DetallePedidoResponseDTO> getDetallesFactura(@RequestBody FacturaRequestDTO nuevaFactura) {
-        return facturaService.getDetallesFactura(nuevaFactura);
+    @GetMapping("/detalle/factura/{idPedido}")
+    public List<DetallePedidoResponseDTO> getDetallesFactura(@PathVariable long idPedido) {
+        return facturaService.getDetallesFactura(idPedido);
     }
 
     @PostMapping("/add/factura")
