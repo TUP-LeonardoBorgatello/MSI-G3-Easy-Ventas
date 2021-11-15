@@ -1,13 +1,13 @@
 package com.msi.easyventas.services;
 
-import com.msi.easyventas.dtos.EmpleadoResponseDTO;
+import com.msi.easyventas.dtos.CantProductosXPedidoDTO;
 import com.msi.easyventas.models.*;
 import com.msi.easyventas.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.text.Normalizer;
+
 import java.util.List;
 
 @Service
@@ -24,6 +24,10 @@ public class AuxService {
     MetodoEntregaRepository entregaRepository;
     @Autowired
     MetodoPagoRepository pagoRepository;
+    @Autowired
+    iDetallePedidoRepository detallePedidoRepository;
+    @Autowired
+    iProductoRepository productoRepository;
 
     public List<TipoDoc> findAllTipoDoc() {
         List<TipoDoc> tipoDocs = tipoDocRepository.findAll();
@@ -48,5 +52,9 @@ public class AuxService {
     public List<MetodoPago> findAllMetodoPago(){
         List<MetodoPago> pagos = pagoRepository.findAll();
         return pagos;
+    }
+
+    public List<CantProductosXPedidoDTO> findAllReporte1(){
+        return detallePedidoRepository.lista();
     }
 }

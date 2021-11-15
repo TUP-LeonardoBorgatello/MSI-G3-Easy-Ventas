@@ -1,5 +1,6 @@
 package com.msi.easyventas.controllers;
 
+import com.msi.easyventas.dtos.CantProductosXPedidoDTO;
 import com.msi.easyventas.models.*;
 import com.msi.easyventas.services.AuxService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,11 @@ public class AuxController {
     @GetMapping("/metodopago")
     public List<MetodoPago> getAllMetodoPago() {
         return auxService.findAllMetodoPago();
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/reporte1")
+    public List<CantProductosXPedidoDTO> getReporte1() {
+        return auxService.findAllReporte1();
     }
 }
