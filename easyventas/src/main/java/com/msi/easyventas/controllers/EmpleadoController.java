@@ -1,5 +1,6 @@
 package com.msi.easyventas.controllers;
 
+import com.msi.easyventas.dtos.EmpleadoChangeStatusDTO;
 import com.msi.easyventas.dtos.EmpleadoRequestDTO;
 import com.msi.easyventas.dtos.EmpleadoResponseDTO;
 import com.msi.easyventas.services.EmpleadoService;
@@ -47,7 +48,7 @@ public class EmpleadoController {
     }
 
     @PostMapping("empleado/status")
-    public ResponseEntity<?> changeStatusEmpleado(@RequestBody EmpleadoResponseDTO empleado) throws Exception {
+    public ResponseEntity<?> changeStatusEmpleado(@RequestBody EmpleadoChangeStatusDTO empleado) throws Exception {
         ServiceResponse<?> response = new ServiceResponse<>("success", "Estado modificado");
         ServiceResponse<?> response2 = new ServiceResponse<>("error", "No se puedo modificar el estado, verificar que sea vendedor.");
         try {
