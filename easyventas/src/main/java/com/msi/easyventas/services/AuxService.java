@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -67,6 +68,13 @@ public class AuxService {
 
     public List<CantFacturaXFecha> findAllReporte2(){
         return facturaRepository.lista();
+    }
+
+    public List<CantFacturaXFecha> findAllReporte3(String fecha1, String fecha2){
+        LocalDate f1 = LocalDate.parse(fecha1);
+        LocalDate f2 = LocalDate.parse(fecha2);
+
+        return facturaRepository.lista2(f1, f2);
     }
 
 
