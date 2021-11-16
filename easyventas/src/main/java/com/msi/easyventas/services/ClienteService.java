@@ -1,5 +1,6 @@
 package com.msi.easyventas.services;
 
+import com.msi.easyventas.dtos.ClienteDeleteDTO;
 import com.msi.easyventas.dtos.ClienteRequestDTO;
 import com.msi.easyventas.dtos.ClienteResponseDTO;
 import com.msi.easyventas.models.Ciudad;
@@ -81,7 +82,7 @@ public class ClienteService implements iClienteService {
     }
 
     @Override
-    public void deleteCliente(ClienteResponseDTO cliente) throws Exception {
+    public void deleteCliente(ClienteDeleteDTO cliente) throws Exception {
         if (clienteRepository.existsByDocumento(cliente.getDocumento())) {
             clienteRepository.deleteByDocumento(cliente.getDocumento());
         } else {

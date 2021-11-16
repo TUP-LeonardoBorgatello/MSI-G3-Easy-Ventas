@@ -1,5 +1,6 @@
 package com.msi.easyventas.services;
 
+import com.msi.easyventas.dtos.EmpleadoChangeStatusDTO;
 import com.msi.easyventas.dtos.EmpleadoRequestDTO;
 import com.msi.easyventas.dtos.EmpleadoResponseDTO;
 import com.msi.easyventas.dtos.LoginRequestDTO;
@@ -14,7 +15,7 @@ public interface iEmpleadoService {
 
     void addEmpleado(EmpleadoRequestDTO empleadoRequestDTO) throws Exception;
 
-    void changeEmpleadoStatus(EmpleadoResponseDTO empleadoResponseDTO) throws Exception;
+    void changeEmpleadoStatus(EmpleadoChangeStatusDTO empleadoResponseDTO) throws Exception;
 
     void updateEmpleado(EmpleadoRequestDTO empleadoRequestDTO) throws Exception;
 
