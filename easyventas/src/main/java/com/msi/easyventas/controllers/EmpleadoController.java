@@ -47,9 +47,16 @@ public class EmpleadoController {
     }
 
     @PostMapping("empleado/status")
-    public String changeStatusEmpleado(@RequestBody EmpleadoResponseDTO empleado) throws Exception {
-        empleadoService.changeEmpleadoStatus(empleado);
-        return "Se ha modificado el estado del empleado.";
+    public ResponseEntity<?> changeStatusEmpleado(@RequestBody EmpleadoResponseDTO empleado) throws Exception {
+        ServiceResponse<?> response = new ServiceResponse<>("success", "Estado modificado");
+        ServiceResponse<?> response2 = new ServiceResponse<>("error", "No se puedo modificar el estado, verificar que sea vendedor.");
+        try {
+            empleadoService.changeEmpleadoStatus(empleado);
+        } catch (Exception e) {
+            return new ResponseEntity<Object>(response2, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Object>(response, HttpStatus.OK);
+
     }
 
     @PutMapping("empleado/update")
