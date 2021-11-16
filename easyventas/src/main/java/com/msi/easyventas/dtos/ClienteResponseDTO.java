@@ -6,7 +6,7 @@ public class ClienteResponseDTO {
     private String apellido;
     private String domicilio;
     private String email;
-    private boolean estado;
+    private String estado;
     private String ciudad;
     private String tipoDocumento;
     private int documento;
@@ -14,7 +14,7 @@ public class ClienteResponseDTO {
     public ClienteResponseDTO() {
     }
 
-    public ClienteResponseDTO(String nombre, String apellido, String domicilio, String email, boolean estado, String ciudad, String tipoDocumento, int documento) {
+    public ClienteResponseDTO(String nombre, String apellido, String domicilio, String email, String estado, String ciudad, String tipoDocumento, int documento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.domicilio = domicilio;
@@ -81,11 +81,11 @@ public class ClienteResponseDTO {
         this.email = email;
     }
 
-    public boolean isEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 }
