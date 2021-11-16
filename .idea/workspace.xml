@@ -4,25 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cca6d051-64bd-4e9f-af2c-52469be1c0d6" name="Changes" comment="1">
-      <change afterPath="$PROJECT_DIR$/easyventas/frontend/clientes.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/easyventas/frontend/clientes2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/easyventas/frontend/indexAdmin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/easyventas/frontend/pedidos2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="cca6d051-64bd-4e9f-af2c-52469be1c0d6" name="Changes" comment="Carga de Frontend completo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/factura.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/formasEntrega.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/formasPago.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/index copy.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/indexReporte.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/indexReporte.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easyventas/frontend/indexVendedor.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/indexVendedor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/indexVendedorViejo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/pedidos.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/pedidos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/pedidosViejo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/vendedores.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/vendedores.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="MatiRomero" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -114,7 +98,7 @@
       <workItem from="1635296169177" duration="645000" />
       <workItem from="1635443728160" duration="342000" />
       <workItem from="1635444119263" duration="232000" />
-      <workItem from="1637084032827" duration="3993000" />
+      <workItem from="1637084032827" duration="4800000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1637041793406</created>
@@ -130,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637041824429</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Carga de Frontend completo">
+      <created>1637093528577</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1637093528577</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,6 +237,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1" />
+    <MESSAGE value="Carga de Frontend completo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Carga de Frontend completo" />
   </component>
 </project>
