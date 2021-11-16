@@ -4,15 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cca6d051-64bd-4e9f-af2c-52469be1c0d6" name="Changes" comment=".">
+    <list default="true" id="cca6d051-64bd-4e9f-af2c-52469be1c0d6" name="Changes" comment="1">
+      <change afterPath="$PROJECT_DIR$/easyventas/frontend/clientes.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/easyventas/frontend/clientes2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/easyventas/frontend/indexAdmin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/easyventas/frontend/pedidos2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/factura.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/formasEntrega.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/formasPago.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/index copy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/indexReporte.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/indexReporte.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/indexVendedor.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/indexVendedor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/indexVendedorViejo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easyventas/frontend/pedidos.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/pedidos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/src/main/java/com/msi/easyventas/controllers/FacturaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/src/main/java/com/msi/easyventas/controllers/FacturaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/pedidosViejo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/vendedores.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/vendedores.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -32,6 +54,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -42,7 +65,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
-  <component name="RunManager" selected="JavaScript Debug.pedidos.html">
+  <component name="RunManager" selected="Spring Boot.TpimsiApplication">
+    <configuration name="indexReporte.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MSI-G3-Easy-Ventas/easyventas/frontend/indexReporte.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="pedidos.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MSI-G3-Easy-Ventas/easyventas/frontend/pedidos.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -66,6 +92,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.indexReporte.html" />
         <item itemvalue="JavaScript Debug.pedidos.html" />
       </list>
     </recent_temporary>
@@ -87,7 +114,23 @@
       <workItem from="1635296169177" duration="645000" />
       <workItem from="1635443728160" duration="342000" />
       <workItem from="1635444119263" duration="232000" />
+      <workItem from="1637084032827" duration="3993000" />
     </task>
+    <task id="LOCAL-00001" summary="1">
+      <created>1637041793406</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1637041793406</updated>
+    </task>
+    <task id="LOCAL-00002" summary="1">
+      <created>1637041824429</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1637041824429</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,5 +245,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
 </project>
