@@ -1,5 +1,6 @@
 package com.msi.easyventas.services;
 
+import com.msi.easyventas.dtos.CantFacturaXFecha;
 import com.msi.easyventas.dtos.CantProductosXPedidoDTO;
 import com.msi.easyventas.models.*;
 import com.msi.easyventas.repositories.*;
@@ -28,6 +29,8 @@ public class AuxService {
     iDetallePedidoRepository detallePedidoRepository;
     @Autowired
     iProductoRepository productoRepository;
+    @Autowired
+    FacturaRepository facturaRepository;
 
     public List<TipoDoc> findAllTipoDoc() {
         List<TipoDoc> tipoDocs = tipoDocRepository.findAll();
@@ -56,5 +59,9 @@ public class AuxService {
 
     public List<CantProductosXPedidoDTO> findAllReporte1(){
         return detallePedidoRepository.lista();
+    }
+
+    public List<CantFacturaXFecha> findAllReporte2(){
+        return facturaRepository.lista();
     }
 }
