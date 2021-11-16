@@ -31,5 +31,5 @@ function modelDoughnutChart(coasters, id) {
         }
     }
 
-    new Chart(id, { type: 'line', data, options })
+    new Chart(id, { type: 'doughnut', data, options })
 }

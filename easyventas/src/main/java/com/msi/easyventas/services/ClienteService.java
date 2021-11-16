@@ -3,10 +3,8 @@ package com.msi.easyventas.services;
 import com.msi.easyventas.dtos.ClienteDeleteDTO;
 import com.msi.easyventas.dtos.ClienteRequestDTO;
 import com.msi.easyventas.dtos.ClienteResponseDTO;
-import com.msi.easyventas.dtos.EmpleadoChangeStatusDTO;
 import com.msi.easyventas.models.Ciudad;
 import com.msi.easyventas.models.Cliente;
-import com.msi.easyventas.models.Empleado;
 import com.msi.easyventas.models.TipoDoc;
 import com.msi.easyventas.repositories.CiudadRepository;
 import com.msi.easyventas.repositories.ClienteRepository;
@@ -15,10 +13,10 @@ import com.msi.easyventas.utils.ClienteMapper;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,24 +47,30 @@ public class ClienteService implements iClienteService {
 
         if (clienteRepository.existsByDocumento(clienteRequestDTO.getDocumento())) {
             throw new Exception("El cliente ya existe.");
-        }
-        else {
+        } else {
             Ciudad ciudad = ciudadRepository.findById(clienteRequestDTO.getId_ciudad()).orElseThrow();
             TipoDoc tipoDoc = tipoDocRepository.findById(clienteRequestDTO.getId_tipo_doc()).orElseThrow();
 
-            Cliente c = new Cliente();
-            c.setNombre(clienteRequestDTO.getNombre());
-            c.setApellido(clienteRequestDTO.getApellido());
-            c.setDomicilio(clienteRequestDTO.getDomicilio());
-            c.setEmail(clienteRequestDTO.getEmail());
-            c.setEstado(clienteRequestDTO.getEstado());
-            c.setCiudad(ciudad);
-            c.setTipoDoc(tipoDoc);
-            c.setDocumento(clienteRequestDTO.getDocumento());
 
-            clienteRepository.save(c);
+            if (clienteRequestDTO.getNombre() == null || clienteRequestDTO.getEstado() == null
+                    || clienteRequestDTO.getApellido() == null || clienteRequestDTO.getDomicilio() == null
+                    || clienteRequestDTO.getEmail() == null || clienteRequestDTO.getDocumento() <= 0) {
+                    throw new Exception("Valores nulos");
+            }
+            else   {
+                Cliente c = new Cliente();
+                c.setNombre(clienteRequestDTO.getNombre());
+                c.setEstado(clienteRequestDTO.getEstado());
+                c.setApellido(clienteRequestDTO.getApellido());
+                c.setDomicilio(clienteRequestDTO.getDomicilio());
+                c.setEmail(clienteRequestDTO.getEmail());
+                c.setDocumento(clienteRequestDTO.getDocumento());
+                c.setCiudad(ciudad);
+                c.setTipoDoc(tipoDoc);
+
+                clienteRepository.save(c);
+            }
         }
-
     }
 
     @Override
@@ -95,6 +99,7 @@ public class ClienteService implements iClienteService {
             throw new Exception("No se puede modificar el estado del vendedor no existe o es un administrador.");
         }
     }
+
     @Override
     public void updateCliente(ClienteRequestDTO clienteDTO) throws Exception {
         if (clienteDTO.getDocumento() != 0) {
