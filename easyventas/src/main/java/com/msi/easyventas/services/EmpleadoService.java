@@ -108,6 +108,8 @@ public class EmpleadoService implements iEmpleadoService {
                     if (empleado.getRolEmpleado().getId() == 2) {
                         Ciudad ciudad = ciudadRepository.findById(empleadoRequestDTO.getId_ciudad()).orElseThrow();
                         TipoDoc tipoDoc = tipoDocRepository.findById(empleadoRequestDTO.getId_tipo_doc()).orElseThrow();
+                        String contraseñaEmpleado;
+                        contraseñaEmpleado = empleado.getContraseña();
                         RolEmpleado rolEmpleado = new RolEmpleado();
                         rolEmpleado.setId(2);
 
@@ -120,6 +122,7 @@ public class EmpleadoService implements iEmpleadoService {
                         empleado.setNombre(empleadoRequestDTO.getNombre());
                         empleado.setDomicilio(empleadoRequestDTO.getDomicilio());
                         empleado.setTipoDoc(tipoDoc);
+                        empleado.setContraseña(contraseñaEmpleado);
                         empleadoRepository.save(empleado);
                     }
                     else{
