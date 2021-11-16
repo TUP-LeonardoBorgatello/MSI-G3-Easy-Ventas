@@ -58,10 +58,16 @@ public class AuxService {
     }
 
     public List<CantProductosXPedidoDTO> findAllReporte1(){
-        return detallePedidoRepository.lista();
+        return detallePedidoRepository.cantProdXPedidos();
+    }
+
+    public List<CantProductosXPedidoDTO> findReporte1ByIdPedido(long idPedido){
+        return detallePedidoRepository.prodXPedido(idPedido);
     }
 
     public List<CantFacturaXFecha> findAllReporte2(){
         return facturaRepository.lista();
     }
+
+
 }
