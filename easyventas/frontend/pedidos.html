@@ -481,23 +481,6 @@
       cargarFactura: function (datos) {
         var html = "<span>";
         html += "<span>" + datos.id_factura + "</span>";
-        html += "<span>" + datos.nombreCliente + "</span>";
-        html += "<span>" + datos.apellidoCliente + "</span>";
-        //html += "<span>" + datos.fechaFactura + "</span>";
-        html += "<span>" + datos.formaEntrega + "</span>";
-        html += "<span>" + datos.metodoPago + "</span>";
-        html += "<span>" + datos.documento + "</span>";
-        //html += "<span>" + datos.domicilio + "</span>";
-        //html += "<span>" + datos.montoTotal + "</span>";
-        $("#nroFactura").append(html);
-        $("#nombreCliente").append(html);
-        $("#apellidoCliente").append(html);
-        //$("#fechaFactura").append(html);
-        $("#formaEntrega").append(html);
-        $("#metodoPago").append(html);
-        $("#documento").append(html);
-        //$("#domicilio").append(html);
-        //$("#montoTotal").append(html);
       }
 
     };
@@ -520,8 +503,6 @@
           app.cargarComboEntregas(result);
         }
       });
-
-
     });
 
   </script>

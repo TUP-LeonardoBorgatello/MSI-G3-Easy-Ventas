@@ -19,16 +19,19 @@ public class FacturaController {
     @Autowired
     FacturaService facturaService;
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/factura/{idPedido}")
     public FacturaResponseDTO getFactura(@PathVariable long idPedido) {
         return facturaService.Factura(idPedido);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/detalle/factura/{idPedido}")
     public List<DetallePedidoResponseDTO> getDetallesFactura(@PathVariable long idPedido) {
         return facturaService.getDetallesFactura(idPedido);
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/add/factura")
     public ResponseEntity<?> addFactura(@RequestBody FacturaRequestDTO nuevaFactura) throws Exception {
         ServiceResponse<?> response = new ServiceResponse<>("success", "Factura agregado con éxito");
