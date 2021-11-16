@@ -14,7 +14,7 @@ public interface iClienteService {
 
     void addCliente(ClienteRequestDTO clienteRequestDTO) throws Exception;
 
-    void deleteCliente(ClienteDeleteDTO cliente) throws Exception;
-
     void updateCliente(ClienteRequestDTO cliente) throws Exception;
+
+    void changeClienteStatus(ClienteDeleteDTO cliente) throws Exception;
 }
