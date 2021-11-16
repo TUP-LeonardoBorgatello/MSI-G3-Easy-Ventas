@@ -1,15 +1,26 @@
 package com.msi.easyventas.dtos;
 
+import com.sun.istack.NotNull;
+
 public class EmpleadoRequestDTO {
 
+    @NotNull
     private String nombre;
+    @NotNull
     private String apellido;
+    @NotNull
     private String domicilio;
+    @NotNull
     private Boolean estado;
+    @NotNull
     private long id_ciudad;
+    @NotNull
     private long id_tipo_doc;
+    @NotNull
     private int documento;
+    @NotNull
     private int genero;
+    @NotNull
     private String contraseña;
 
     public String getContraseña() {
