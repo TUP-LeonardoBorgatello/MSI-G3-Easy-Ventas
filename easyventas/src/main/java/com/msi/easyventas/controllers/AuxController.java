@@ -1,5 +1,6 @@
 package com.msi.easyventas.controllers;
 
+import com.msi.easyventas.dtos.CantFacturaXFecha;
 import com.msi.easyventas.dtos.CantProductosXPedidoDTO;
 import com.msi.easyventas.models.*;
 import com.msi.easyventas.services.AuxService;
@@ -51,5 +52,11 @@ public class AuxController {
     @GetMapping("/reporte1")
     public List<CantProductosXPedidoDTO> getReporte1() {
         return auxService.findAllReporte1();
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/reporte2")
+    public List<CantFacturaXFecha> getReporte2() {
+        return auxService.findAllReporte2();
     }
 }
