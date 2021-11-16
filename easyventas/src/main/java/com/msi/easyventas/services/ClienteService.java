@@ -3,8 +3,10 @@ package com.msi.easyventas.services;
 import com.msi.easyventas.dtos.ClienteDeleteDTO;
 import com.msi.easyventas.dtos.ClienteRequestDTO;
 import com.msi.easyventas.dtos.ClienteResponseDTO;
+import com.msi.easyventas.dtos.EmpleadoChangeStatusDTO;
 import com.msi.easyventas.models.Ciudad;
 import com.msi.easyventas.models.Cliente;
+import com.msi.easyventas.models.Empleado;
 import com.msi.easyventas.models.TipoDoc;
 import com.msi.easyventas.repositories.CiudadRepository;
 import com.msi.easyventas.repositories.ClienteRepository;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -82,14 +85,16 @@ public class ClienteService implements iClienteService {
     }
 
     @Override
-    public void deleteCliente(ClienteDeleteDTO cliente) throws Exception {
+    public void changeClienteStatus(ClienteDeleteDTO cliente) throws Exception {
         if (clienteRepository.existsByDocumento(cliente.getDocumento())) {
-            clienteRepository.deleteByDocumento(cliente.getDocumento());
+            List<Cliente> clientes = clienteRepository.searchByDocumento(cliente.getDocumento());
+            for (Cliente c : clientes) {
+                clienteRepository.updateClienteStatus(c.getId());
+            }
         } else {
-            throw new Exception("No se puede eliminar el cliente.");
+            throw new Exception("No se puede modificar el estado del vendedor no existe o es un administrador.");
         }
     }
-
     @Override
     public void updateCliente(ClienteRequestDTO clienteDTO) throws Exception {
         if (clienteDTO.getDocumento() != 0) {
