@@ -1,24 +1,21 @@
 package com.msi.easyventas.dtos;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 public class FacturaResponseDTO {
 
     private long id_factura;
-    private Date fechaFactura;
+    private LocalDate fechaFactura;
     private String formaEntrega;
     private String metodoPago;
     private String nombreCliente;
     private String apellidoCliente;
     private int documento;
     private String domicilio;
-    private List<DetallePedidoResponseDTO> detalles;
     private double montoTotal;
 
-    public FacturaResponseDTO(long id_factura, Date fechaFactura, String formaEntrega, String metodoPago,
-                              String nombreCliente, String apellidoCliente, int documento, String domicilio,
-                              List<DetallePedidoResponseDTO> detalles, double montoTotal) {
+    public FacturaResponseDTO(long id_factura, LocalDate fechaFactura, String formaEntrega, String metodoPago,
+                              String nombreCliente, String apellidoCliente, int documento, String domicilio, double montoTotal) {
         this.id_factura = id_factura;
         this.fechaFactura = fechaFactura;
         this.formaEntrega = formaEntrega;
@@ -27,7 +24,6 @@ public class FacturaResponseDTO {
         this.apellidoCliente = apellidoCliente;
         this.documento = documento;
         this.domicilio = domicilio;
-        this.detalles = detalles;
         this.montoTotal = montoTotal;
     }
 
@@ -42,11 +38,11 @@ public class FacturaResponseDTO {
         this.id_factura = id_factura;
     }
 
-    public Date getFechaFactura() {
+    public LocalDate getFechaFactura() {
         return fechaFactura;
     }
 
-    public void setFechaFactura(Date fechaFactura) {
+    public void setFechaFactura(LocalDate fechaFactura) {
         this.fechaFactura = fechaFactura;
     }
 
@@ -106,11 +102,4 @@ public class FacturaResponseDTO {
         this.montoTotal = montoTotal;
     }
 
-    public List<DetallePedidoResponseDTO> getDetalles() {
-        return detalles;
-    }
-
-    public void setDetalles(List<DetallePedidoResponseDTO> detalles) {
-        this.detalles = detalles;
-    }
 }

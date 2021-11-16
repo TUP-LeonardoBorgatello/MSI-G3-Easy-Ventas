@@ -5,17 +5,17 @@ import java.time.LocalDate;
 public class PedidoRequestDTO {
 
     private LocalDate fecha_pedido;
-    private long id_cliente;
-    private long id_empleado;
+    private int documentoCliente;
+    private int documentoEmpleado;
     private long cantidad;
-    private long id_producto;
+    private int sku;
 
-    public PedidoRequestDTO(LocalDate fecha_pedido, long id_cliente, long id_empleado, long cantidad, long id_producto) {
+    public PedidoRequestDTO(LocalDate fecha_pedido, int documentoCliente, int documentoEmpleado, long cantidad, int sku) {
         this.fecha_pedido = fecha_pedido;
-        this.id_cliente = id_cliente;
-        this.id_empleado = id_empleado;
+        this.documentoCliente = documentoCliente;
+        this.documentoEmpleado = documentoEmpleado;
         this.cantidad = cantidad;
-        this.id_producto = id_producto;
+        this.sku = sku;
     }
 
     public PedidoRequestDTO() {
@@ -29,12 +29,12 @@ public class PedidoRequestDTO {
         this.cantidad = cantidad;
     }
 
-    public long getId_producto() {
-        return id_producto;
+    public int getSku() {
+        return sku;
     }
 
-    public void setId_producto(long id_producto) {
-        this.id_producto = id_producto;
+    public void setSku(int sku) {
+        this.sku = sku;
     }
 
     public LocalDate getFecha_pedido() {
@@ -45,20 +45,20 @@ public class PedidoRequestDTO {
         this.fecha_pedido = fecha_pedido;
     }
 
-    public long getId_cliente() {
-        return id_cliente;
+    public int getDocumentoCliente() {
+        return documentoCliente;
     }
 
-    public void setId_cliente(long id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setDocumentoCliente(int documentoCliente) {
+        this.documentoCliente = documentoCliente;
     }
 
-    public long getId_empleado() {
-        return id_empleado;
+    public int getDocumentoEmpleado() {
+        return documentoEmpleado;
     }
 
-    public void setId_empleado(long id_empleado) {
-        this.id_empleado = id_empleado;
+    public void setDocumentoEmpleado(int documentoEmpleado) {
+        this.documentoEmpleado = documentoEmpleado;
     }
 
 }

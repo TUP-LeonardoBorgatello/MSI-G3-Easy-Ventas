@@ -1,7 +1,6 @@
 package com.msi.easyventas.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "metodo_pago")
@@ -14,12 +13,10 @@ public class MetodoPago {
     @Column(length = 50, nullable = false)
     private String descripcion;
 
-    @OneToMany(mappedBy = "metodoPago")
-    private List<Factura> facturas;
 
-    public MetodoPago(String descripcion, List<Factura> facturas) {
+    public MetodoPago(String descripcion) {
         this.descripcion = descripcion;
-        this.facturas = facturas;
+
     }
 
     public MetodoPago() {
@@ -41,11 +38,4 @@ public class MetodoPago {
         this.descripcion = descripcion;
     }
 
-    public List<Factura> getFacturas() {
-        return facturas;
-    }
-
-    public void setFacturas(List<Factura> facturas) {
-        this.facturas = facturas;
-    }
 }

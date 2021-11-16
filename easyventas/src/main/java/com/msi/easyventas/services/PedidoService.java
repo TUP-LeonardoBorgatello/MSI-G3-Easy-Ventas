@@ -1,6 +1,5 @@
 package com.msi.easyventas.services;
 
-import com.msi.easyventas.dtos.DetallePedidoRequestDTO;
 import com.msi.easyventas.dtos.PedidoDeleteRequestDTO;
 import com.msi.easyventas.dtos.PedidoRequestDTO;
 import com.msi.easyventas.dtos.PedidoResponseDTO;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,18 +70,21 @@ public class PedidoService implements iPedidoService {
     @Override
     public void addPedido(PedidoRequestDTO pedidoRequestDTO) throws Exception {
 
-        if (!clienteRepository.existsById(pedidoRequestDTO.getId_cliente())
-                || !empleadoRepository.existsById(pedidoRequestDTO.getId_empleado())) {
+        if (!clienteRepository.existsByDocumento(pedidoRequestDTO.getDocumentoCliente())
+                || !empleadoRepository.existsByDocumento(pedidoRequestDTO.getDocumentoEmpleado())) {
             throw new NotFoundException("Alguno de los datos no existe. Verificar el cliente, empleado o estado.");
         } else {
-            Cliente cliente = clienteRepository.findById(pedidoRequestDTO.getId_cliente()).orElseThrow();
-            Empleado empleado = empleadoRepository.findById(pedidoRequestDTO.getId_empleado()).orElseThrow();
+            Cliente cliente = clienteRepository.searchByDocumento1(pedidoRequestDTO.getDocumentoCliente());
+            Empleado empleado = empleadoRepository.searchByDocumento(pedidoRequestDTO.getDocumentoEmpleado());
+
             Estado estado = new Estado();
-            estado.setIdEstado(2);
+            estado.setIdEstado(1);
 
             Pedido p = new Pedido();
 
-            p.setFechaPedido(pedidoRequestDTO.getFecha_pedido());
+            LocalDate fecha = LocalDate.now();
+
+            p.setFechaPedido(fecha);
             p.setCliente(cliente);
             p.setEmpleado(empleado);
             p.setEstado(estado);
@@ -94,14 +97,13 @@ public class PedidoService implements iPedidoService {
 
     public void addDetallePedido(PedidoRequestDTO detallePedidoRequestDTO) throws Exception {
 
-        if (!productoRepository.existsById(detallePedidoRequestDTO.getId_producto())) {
-            throw new NotFoundException("Alguno de los datos no existe. Verificar el pedido o poducto.");
-        } else {
-            Producto producto = productoRepository.findById(detallePedidoRequestDTO.getId_producto()).orElseThrow();
-            if (producto.getStock() >= 0 && producto.getStock() > detallePedidoRequestDTO.getCantidad()) {
-                long idPedido = pedidoRepository.lastPedidoId();
-                Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow();
-
+        Producto producto = productoRepository.searchBySKU(detallePedidoRequestDTO.getSku());
+        if (producto.getStock() >= 0 &&
+                producto.getStock() > detallePedidoRequestDTO.getCantidad() &&
+                detallePedidoRequestDTO.getCantidad() > 0) {
+            long idPedido = pedidoRepository.lastPedidoId();
+            Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow();
+            if (pedido.getEstado().getIdEstado() == 1){
                 DetallePedido d = new DetallePedido();
 
                 d.setPedido(pedido);
@@ -109,20 +111,27 @@ public class PedidoService implements iPedidoService {
                 d.setProducto(producto);
 
                 detallePedidoRepository.save(d);
-            } else {
-                throw new NotFoundException("El producto no tiene stock.");
             }
-
+            else {
+                throw new NotFoundException("El pedido esta finalizado o cancelado.");
+            }
+        } else {
+            throw new NotFoundException("El producto no tiene stock.");
         }
     }
 
     public void deletePedido(PedidoDeleteRequestDTO pedidoDelete) throws Exception {
 
         List<DetallePedido> detallePedidos = detallePedidoRepository.findDetallePedidoByIdPedido(pedidoDelete.getId_pedido());
+        Pedido pedido = pedidoRepository.findById(pedidoDelete.getId_pedido()).orElseThrow();
         if (detallePedidos.isEmpty()) {
             pedidoRepository.deleteById(pedidoDelete.getId_pedido());
         } else {
-            pedidoRepository.updatePedidoCanceledStatus(pedidoDelete.getId_pedido());
+            if (pedido.getEstado().getIdEstado() == 1) {
+                pedidoRepository.updatePedidoCanceledStatus(pedidoDelete.getId_pedido());
+            } else {
+                throw new Exception("El pedido está finalizado o cancelado");
+            }
         }
     }
 

@@ -1,7 +1,6 @@
 package com.msi.easyventas.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "productos")
@@ -19,9 +18,6 @@ public class Producto {
     private double precioVenta;
     @Column(nullable = false)
     private long sku;
-
-    @OneToMany(mappedBy = "producto")
-    private List<DetallePedido> detallePedidos;
 
     @ManyToOne()
     @JoinColumn(name = "id_tipo_producto", nullable = false)
@@ -67,14 +63,6 @@ public class Producto {
         this.sku = sku;
     }
 
-    public List<DetallePedido> getDetallePedidos() {
-        return detallePedidos;
-    }
-
-    public void setDetallePedidos(List<DetallePedido> detallePedidos) {
-        this.detallePedidos = detallePedidos;
-    }
-
     public double getPrecioVenta() {
         return precioVenta;
     }
@@ -86,12 +74,11 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String descripcion, long stock, double precioVenta, long sku, List<DetallePedido> detallePedidos, TipoProducto tipoProducto) {
+    public Producto(String descripcion, long stock, double precioVenta, long sku, TipoProducto tipoProducto) {
         this.descripcion = descripcion;
         this.stock = stock;
         this.precioVenta = precioVenta;
         this.sku = sku;
-        this.detallePedidos = detallePedidos;
         this.tipoProducto = tipoProducto;
     }
 }

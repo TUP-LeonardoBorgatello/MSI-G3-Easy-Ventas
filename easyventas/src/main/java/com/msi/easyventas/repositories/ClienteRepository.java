@@ -16,4 +16,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     List<Cliente> searchByDocumento(@Param("documento") int documento);
 
     void deleteByDocumento(int documento);
+
+    @Query(value = "select * from Clientes where documento = :documento LIMIT 1", nativeQuery = true)
+    Cliente searchByDocumento1(@Param("documento") int documento);
 }
