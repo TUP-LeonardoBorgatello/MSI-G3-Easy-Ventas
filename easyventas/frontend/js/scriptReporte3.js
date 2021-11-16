@@ -1,13 +1,14 @@
-var ctx = document.getElementById('reporte1')
-var mychart = new Chart(ctx,
+var ctx2 = document.getElementById('reporte3')
+var mychart2 = new Chart(ctx2,
     {
         type: 'bar',
         data:
             {
                 datasets:
                     [{
-                        backgroundColor: ['#FC0101','#FC6401','#FCE901','#27FC01','#01FCFC','#0177FC','#8A01FC','#01FCA1','#FCB401','#01CBFC','#B8FC01'],
+                        backgroundColor: ['#01FCA1', '#FCB401', '#01CBFC', '#B8FC01'],
                         label: 'Cantiadad de Productos por pedido',
+                        borderColor: ['black'],
                         borderWidth: 3
                     }]
             },
@@ -30,17 +31,22 @@ var mychart = new Chart(ctx,
     })
 
 
-url ='http://localhost:8080/api/easyventas/reporte1';
+function mostartxt() {
+    let doc = document.getElementById("txt").value;
+    let url2 = 'http://localhost:8080/api/easyventas/reporte1/' + doc + '';
 
-fetch(url)
-    .then(response => response.json())
-    .then(datos => mostrar(datos))
-    .catch(error => console.log(error))
+    fetch(url2)
+        .then(response => response.json())
+        .then(datos => mostrar2(datos))
+        .catch(error => console.log(error))
 
-function mostrar(productos) {
+}
+
+
+
+function mostrar2(productos) {
     productos.forEach(element => {
-        mychart.data['labels'].push(element.numeroPedido)
-        mychart.data['datasets'][0].data.push(element.cantidad)
+        mychart2.data['labels'].push(element.numeroPedido)
+        mychart2.data['datasets'][0].data.push(element.cantidad)
     });
-
 }
