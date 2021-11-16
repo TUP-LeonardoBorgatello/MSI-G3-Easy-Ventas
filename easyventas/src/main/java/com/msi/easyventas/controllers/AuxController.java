@@ -4,12 +4,11 @@ import com.msi.easyventas.dtos.CantFacturaXFecha;
 import com.msi.easyventas.dtos.CantProductosXPedidoDTO;
 import com.msi.easyventas.models.*;
 import com.msi.easyventas.services.AuxService;
-import com.msi.easyventas.services.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -49,24 +48,26 @@ public class AuxController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/reporte1All")
+    @GetMapping("/reporte1")
     public List<CantProductosXPedidoDTO> getReporte1() {
         return auxService.findAllReporte1();
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/reporte1")
-    public ResponseEntity<?> getReporte1ByIdPedido(@RequestParam long idPedido) throws Exception {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(auxService.findReporte1ByIdPedido(idPedido));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el pedido.");
-        }
+    @GetMapping("/reporte1/{idPedido}")
+    public List<CantProductosXPedidoDTO> getReporte1ByIdPedido(@PathVariable long idPedido) throws Exception {
+            return auxService.findReporte1ByIdPedido(idPedido);
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/reporte2")
     public List<CantFacturaXFecha> getReporte2() {
         return auxService.findAllReporte2();
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/reporte2/{fecha1}/{fecha2}")
+    public List<CantFacturaXFecha> getReporte2(@PathVariable String fecha1, @PathVariable String fecha2) {
+        return auxService.findAllReporte3(fecha1, fecha2);
     }
 }
