@@ -4,11 +4,11 @@ import com.msi.easyventas.dtos.CantFacturaXFecha;
 import com.msi.easyventas.dtos.CantProductosXPedidoDTO;
 import com.msi.easyventas.models.*;
 import com.msi.easyventas.services.AuxService;
+import com.msi.easyventas.services.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,9 +49,19 @@ public class AuxController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/reporte1")
+    @GetMapping("/reporte1All")
     public List<CantProductosXPedidoDTO> getReporte1() {
         return auxService.findAllReporte1();
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/reporte1")
+    public ResponseEntity<?> getReporte1ByIdPedido(@RequestParam long idPedido) throws Exception {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(auxService.findReporte1ByIdPedido(idPedido));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el pedido.");
+        }
     }
 
     @CrossOrigin(origins = "*")

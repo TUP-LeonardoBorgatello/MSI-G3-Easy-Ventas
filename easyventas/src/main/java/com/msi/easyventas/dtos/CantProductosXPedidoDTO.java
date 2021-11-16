@@ -3,7 +3,7 @@ package com.msi.easyventas.dtos;
 public class CantProductosXPedidoDTO {
 
     private long cantidad;
-    private long numeroFactura;
+    private long numeroPedido;
 
     public long getCantidad() {
         return cantidad;
@@ -13,17 +13,17 @@ public class CantProductosXPedidoDTO {
         this.cantidad = cantidad;
     }
 
-    public long getNumeroFactura() {
-        return numeroFactura;
+    public long getNumeroPedido() {
+        return numeroPedido;
     }
 
-    public void setNumeroFactura(long numeroFactura) {
-        this.numeroFactura = numeroFactura;
+    public void setNumeroPedido(long numeroPedido) {
+        this.numeroPedido = numeroPedido;
     }
 
-    public CantProductosXPedidoDTO(long cantidad, long numeroFactura) {
+    public CantProductosXPedidoDTO(long cantidad, long numeroPedido) {
         this.cantidad = cantidad;
-        this.numeroFactura = numeroFactura;
+        this.numeroPedido = numeroPedido;
     }
 
     public CantProductosXPedidoDTO() {
