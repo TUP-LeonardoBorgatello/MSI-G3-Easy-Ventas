@@ -13,7 +13,12 @@ public class ClienteMapper {
         clienteResponseDTO.setCiudad(cliente.getCiudad().getDescripcion());
         clienteResponseDTO.setDomicilio(cliente.getDomicilio());
         clienteResponseDTO.setEmail(cliente.getEmail());
-        clienteResponseDTO.setEstado(cliente.getEstado());
+        if (cliente.getEstado()){
+            clienteResponseDTO.setEstado("Activo");
+        }
+        else{
+            clienteResponseDTO.setEstado("Inactivo");
+        }
         clienteResponseDTO.setTipoDocumento(cliente.getTipoDoc().getDescripcion());
         clienteResponseDTO.setDocumento(cliente.getDocumento());
 
