@@ -113,6 +113,7 @@ public class EmpleadoService implements iEmpleadoService {
                         RolEmpleado rolEmpleado = new RolEmpleado();
                         rolEmpleado.setId(2);
 
+
                         empleado.setDocumento(empleadoRequestDTO.getDocumento());
                         empleado.setGenero(empleadoRequestDTO.getGenero());
                         empleado.setRolEmpleado(rolEmpleado);
