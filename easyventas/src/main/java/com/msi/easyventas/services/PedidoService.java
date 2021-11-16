@@ -99,7 +99,7 @@ public class PedidoService implements iPedidoService {
 
         Producto producto = productoRepository.searchBySKU(detallePedidoRequestDTO.getSku());
         if (producto.getStock() >= 0 &&
-                producto.getStock() > detallePedidoRequestDTO.getCantidad() &&
+                producto.getStock() >= detallePedidoRequestDTO.getCantidad() &&
                 detallePedidoRequestDTO.getCantidad() > 0) {
             long idPedido = pedidoRepository.lastPedidoId();
             Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow();

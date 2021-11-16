@@ -94,6 +94,24 @@
             </tfoot>
           </table>
 
+          <div class="alert alert-primary" id="msg3" style="display: none;" role="alert"></div>
+          <table id="detalleFactura" class="table table-bordered" style="width:100%">
+            <thead>
+            <tr>
+              <th>NombreProducto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+              <th>NombreProducto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+            </tr>
+            </tfoot>
+          </table>
+
           <div class="form-group mt-5">
             <label for="id_tipo_doc">Seleccione la forma de pago</label>
             <select class="form-control" name="cboPago" id="cboPago"></select>
@@ -481,27 +499,11 @@
       cargarFactura: function (datos) {
         var html = "<span>";
         html += "<span>" + datos.id_factura + "</span>";
-        html += "<span>" + datos.nombreCliente + "</span>";
-        html += "<span>" + datos.apellidoCliente + "</span>";
-        //html += "<span>" + datos.fechaFactura + "</span>";
-        html += "<span>" + datos.formaEntrega + "</span>";
-        html += "<span>" + datos.metodoPago + "</span>";
-        html += "<span>" + datos.documento + "</span>";
-        //html += "<span>" + datos.domicilio + "</span>";
-        //html += "<span>" + datos.montoTotal + "</span>";
         $("#nroFactura").append(html);
-        $("#nombreCliente").append(html);
-        $("#apellidoCliente").append(html);
-        //$("#fechaFactura").append(html);
-        $("#formaEntrega").append(html);
-        $("#metodoPago").append(html);
-        $("#documento").append(html);
-        //$("#domicilio").append(html);
-        //$("#montoTotal").append(html);
-      }
+
+        }
 
     };
-
     $(document).ready(function () {
       app.init();
 
