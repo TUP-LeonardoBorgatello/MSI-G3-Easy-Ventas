@@ -3,6 +3,7 @@ package com.msi.easyventas.controllers;
 import com.msi.easyventas.dtos.EmpleadoRequestDTO;
 import com.msi.easyventas.dtos.EmpleadoResponseDTO;
 import com.msi.easyventas.services.EmpleadoService;
+import com.msi.easyventas.services.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +25,16 @@ public class EmpleadoController {
 
     @PostMapping("/add/empleado")
     public ResponseEntity<?> addEmpleado(@RequestBody EmpleadoRequestDTO nuevoEmpleado) throws Exception {
+        ServiceResponse<?> response = new ServiceResponse<>("success", "Empleado agregado con éxito.");
+        ServiceResponse<?> response2 = new ServiceResponse<>("error", "No se puedo agregar el empleado.");
         if (nuevoEmpleado != null) {
             try {
                 empleadoService.addEmpleado(nuevoEmpleado);
             } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Empleado ya existe o se necesita verificar los datos ingresados.");
+                return new ResponseEntity<Object>(response2, HttpStatus.BAD_REQUEST);
             }
         }
-        return ResponseEntity.status(HttpStatus.OK).body("Agregado con éxito");
+        return new ResponseEntity<Object>(response, HttpStatus.OK);
     }
 
     @GetMapping("/empleado")
@@ -51,11 +54,13 @@ public class EmpleadoController {
 
     @PutMapping("empleado/update")
     public ResponseEntity<?> updateCliente(@RequestBody EmpleadoRequestDTO empleado) throws Exception {
+        ServiceResponse<?> response = new ServiceResponse<>("success", "Empleado modificado");
+        ServiceResponse<?> response2 = new ServiceResponse<>("error", "No se puedo modificar el empleado, verificar si es vendedor.");
         try {
             empleadoService.updateEmpleado(empleado);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontró el empleado con ese documento o es administrador.");
+            return new ResponseEntity<Object>(response2, HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.status(HttpStatus.OK).body("El empleado se modificó correctamente.");
+        return new ResponseEntity<Object>(response, HttpStatus.OK);
     }
 }
