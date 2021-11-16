@@ -14,21 +14,29 @@
   <section class="col col-lg-4">
     <figure>
       <p>Cantidad de Productos por Pedidos</p>
-      <input type="text" id="txt1" placeholder="ingrese n° pedido">
-
-      <canvas id="reporte1" onclick="cargartxt();"></canvas>
+      <canvas id="reporte1" ></canvas>
     </figure>
 
+    <figure>
+      <input type="text" id="txt" placeholder="ingrese n° pedido">
+
+      <canvas id="reporte3" onclick="mostartxt();"></canvas>
+    </figure>
+  </section>
+
+  <section class="col col-lg-4">
     <figure>
       <p>Cantidad de Factura por Fecha</p>
       <canvas id="reporte2"></canvas>
     </figure>
   </section>
+
 </main>
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="scriptReporte1.js"></script>
-<script src="scriptReporte2.js"></script>
+<script src="js/scriptReporte1.js"></script>
+<script src="js/scriptReporte2.js"></script>
+<script src="js/scriptReporte3.js"></script>
 </body>
 </html>

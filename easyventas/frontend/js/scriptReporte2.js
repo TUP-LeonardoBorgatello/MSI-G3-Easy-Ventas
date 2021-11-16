@@ -1,42 +1,31 @@
-var ctx = document.getElementById('reporte2')
-var mychart2 = new Chart(ctx,
-    {
-        type:'doughnut',
-        data:
-            {
-                datasets:
-                    [{
-                        backgroundColor: ['#FC0101','#FC6401','#FCE901','#27FC01','#01FCFC','#0177FC','#8A01FC','#01FCA1','#FCB401','#01CBFC','#B8FC01'],
-                        label:'productos2',
-                        borderColor:['red'],
-                        borderWidth: 3
-                    }]
-            },
-        options:
-            {
-                scales:
-                    {
-                        yAxis:
-                            {
-                                beginAtZero:true
-                            }
-                    }
-            }
-    })
-
-
-let endpoint='http://localhost:8080/api/easyventas/reporte2'
-fetch(endpoint)
+fetch('http://localhost:8080/api/easyventas/reporte2')
     .then(response => response.json())
-    .then(datos => mostrar2(datos))
-    .catch(error => console.log(error))
+    .then(data => printCharts(data))
 
-function mostrar2(factura)
-{
-    factura.forEach(element =>
-    {
-        mychart2.data['labels'].push(element.fecha)
-        mychart2.data['datasets'][0].data.push(element.cantFacturas)
-    });
 
+function printCharts(coasters) {
+
+    modelDoughnutChart(coasters, 'reporte2')
+}
+
+function modelDoughnutChart(coasters,id) {
+
+    const selectedCoasters = coasters.filter(eachCoaster => eachCoaster.cantFacturas)
+
+    const data = {
+        labels: selectedCoasters.map(eachCoaster => eachCoaster.fecha),
+        datasets: [{
+            data: selectedCoasters.map(eachCoaster => eachCoaster.cantFacturas),
+            backgroundColor: ['#FC0101','#FC6401','#FCE901','#27FC01','#01FCFC','#0177FC','#8A01FC','#01FCA1','#FCB401','#01CBFC','#B8FC01'],
+            borderColor: ['black']
+        }]
+    }
+
+    const options = {
+        legend: {
+            position: 'right'
+        }
+    }
+
+    new Chart(id, { type: 'doughnut', data, options })
 }
