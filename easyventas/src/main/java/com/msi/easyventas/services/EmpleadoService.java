@@ -1,5 +1,6 @@
 package com.msi.easyventas.services;
 
+import com.msi.easyventas.dtos.EmpleadoChangeStatusDTO;
 import com.msi.easyventas.dtos.EmpleadoRequestDTO;
 import com.msi.easyventas.dtos.EmpleadoResponseDTO;
 import com.msi.easyventas.dtos.LoginRequestDTO;
@@ -88,7 +89,7 @@ public class EmpleadoService implements iEmpleadoService {
     }
 
     @Override
-    public void changeEmpleadoStatus(EmpleadoResponseDTO empleado) throws Exception {
+    public void changeEmpleadoStatus(EmpleadoChangeStatusDTO empleado) throws Exception {
         if (empleadoRepository.existsByDocumento(empleado.getDocumento()) && !Objects.equals(empleado.getRolEmpleado(), "Administrador")) {
             List<Empleado> empleados = empleadoRepository.searchByDocumento(empleado.getDocumento());
             for (Empleado e : empleados) {

@@ -1,5 +1,6 @@
 package com.msi.easyventas.controllers;
 
+import com.msi.easyventas.dtos.ClienteDeleteDTO;
 import com.msi.easyventas.dtos.ClienteRequestDTO;
 import com.msi.easyventas.dtos.ClienteResponseDTO;
 import com.msi.easyventas.models.Cliente;
@@ -58,7 +59,7 @@ public class ClienteController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("cliente/delete")
-    public ResponseEntity<?> deleteCliente(@RequestBody ClienteResponseDTO cliente) throws Exception {
+    public ResponseEntity<?> deleteCliente(@RequestBody ClienteDeleteDTO cliente) throws Exception {
         ServiceResponse<?> response = new ServiceResponse<>("success", "Se eliminó correctamente el cliente");
         ServiceResponse<?> response2 = new ServiceResponse<>("error", "No se puede eliminar el cliente, verifique si el dni existe");
         try{
