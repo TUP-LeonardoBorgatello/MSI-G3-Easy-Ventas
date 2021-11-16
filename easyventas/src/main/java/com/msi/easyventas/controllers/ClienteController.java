@@ -63,7 +63,7 @@ public class ClienteController {
         ServiceResponse<?> response = new ServiceResponse<>("success", "Se eliminó correctamente el cliente");
         ServiceResponse<?> response2 = new ServiceResponse<>("error", "No se puede eliminar el cliente, verifique si el dni existe");
         try{
-            clienteService.deleteCliente(cliente);
+            clienteService.changeClienteStatus(cliente);
         } catch (Exception e){
             return  new ResponseEntity<Object>(response2, HttpStatus.BAD_REQUEST);
         }
