@@ -13,7 +13,6 @@ import com.msi.easyventas.utils.ClienteMapper;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -48,16 +47,12 @@ public class ClienteService implements iClienteService {
         if (clienteRepository.existsByDocumento(clienteRequestDTO.getDocumento())) {
             throw new Exception("El cliente ya existe.");
         } else {
-            Ciudad ciudad = ciudadRepository.findById(clienteRequestDTO.getId_ciudad()).orElseThrow();
-            TipoDoc tipoDoc = tipoDocRepository.findById(clienteRequestDTO.getId_tipo_doc()).orElseThrow();
-
-
-            if (clienteRequestDTO.getNombre() == null || clienteRequestDTO.getEstado() == null
-                    || clienteRequestDTO.getApellido() == null || clienteRequestDTO.getDomicilio() == null
-                    || clienteRequestDTO.getEmail() == null || clienteRequestDTO.getDocumento() <= 0) {
-                    throw new Exception("Valores nulos");
-            }
-            else   {
+            if (clienteRequestDTO.getNombre() == "" || clienteRequestDTO.getApellido() == "" || clienteRequestDTO.getDomicilio() == ""
+                    || clienteRequestDTO.getEmail() == "" || clienteRequestDTO.getDocumento() <= 0) {
+                throw new Exception("Valores nulos");
+            } else {
+                Ciudad ciudad = ciudadRepository.findById(clienteRequestDTO.getId_ciudad()).orElseThrow();
+                TipoDoc tipoDoc = tipoDocRepository.findById(clienteRequestDTO.getId_tipo_doc()).orElseThrow();
                 Cliente c = new Cliente();
                 c.setNombre(clienteRequestDTO.getNombre());
                 c.setEstado(clienteRequestDTO.getEstado());
@@ -106,16 +101,22 @@ public class ClienteService implements iClienteService {
             List<Cliente> clientes = clienteRepository.searchByDocumento(clienteDTO.getDocumento());
             if (clienteRepository.existsByDocumento(clienteDTO.getDocumento())) {
                 for (Cliente c : clientes) {
-                    c.setNombre(clienteDTO.getNombre());
-                    c.setApellido(clienteDTO.getApellido());
-                    c.setEmail(clienteDTO.getEmail());
-                    Ciudad ciudad = ciudadRepository.findById(clienteDTO.getId_ciudad()).orElseThrow();
-                    c.setCiudad(ciudad);
-                    TipoDoc tipoDoc = tipoDocRepository.findById(clienteDTO.getId_tipo_doc()).orElseThrow();
-                    c.setTipoDoc(tipoDoc);
-                    c.setEstado(clienteDTO.getEstado());
-                    c.setDomicilio(clienteDTO.getDomicilio());
-                    clienteRepository.save(c);
+                    if (clienteDTO.getNombre() == "" || clienteDTO.getApellido() == "" || clienteDTO.getDomicilio() == ""
+                            || clienteDTO.getEmail() == "" || clienteDTO.getDocumento() <= 0) {
+                        throw new Exception("No se pudo agregar, campos nulos.");
+                    } else {
+                        c.setNombre(clienteDTO.getNombre());
+                        c.setApellido(clienteDTO.getApellido());
+                        c.setEmail(clienteDTO.getEmail());
+                        Ciudad ciudad = ciudadRepository.findById(clienteDTO.getId_ciudad()).orElseThrow();
+                        c.setCiudad(ciudad);
+                        TipoDoc tipoDoc = tipoDocRepository.findById(clienteDTO.getId_tipo_doc()).orElseThrow();
+                        c.setTipoDoc(tipoDoc);
+                        c.setEstado(clienteDTO.getEstado());
+                        c.setDomicilio(clienteDTO.getDomicilio());
+                        clienteRepository.save(c);
+                    }
+
                 }
             } else {
                 throw new Exception("No existe el cliente.");

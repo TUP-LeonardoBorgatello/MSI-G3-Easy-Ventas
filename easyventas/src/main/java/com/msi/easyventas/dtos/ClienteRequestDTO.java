@@ -1,23 +1,22 @@
 package com.msi.easyventas.dtos;
 
-import com.sun.istack.NotNull;
 
 public class ClienteRequestDTO {
-    @NotNull
+
     private String nombre;
-    @NotNull
+
     private String apellido;
-    @NotNull
+
     private String domicilio;
-    @NotNull
+
     private String email;
-    @NotNull
+
     private Boolean estado;
-    @NotNull
+
     private long id_ciudad;
-    @NotNull
+
     private long id_tipo_doc;
-    @NotNull
+
     private int documento;
 
 
