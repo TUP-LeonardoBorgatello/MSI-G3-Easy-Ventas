@@ -13,7 +13,7 @@ public interface iDetallePedidoRepository extends JpaRepository<DetallePedido, L
     @Query(value = "select * from detalles_pedidos where id_pedido like %:id_pedido%", nativeQuery = true)
     List<DetallePedido> findDetallePedidoByIdPedido(@Param("id_pedido") long id_pedido);
 
-    @Query(value = "select new com.msi.easyventas.dtos.CantProductosXPedidoDTO(d.cantidad, d.pedido.idPedido) from DetallePedido d")
+    @Query(value = "select new com.msi.easyventas.dtos.CantProductosXPedidoDTO(sum(d.cantidad), d.pedido.idPedido) from DetallePedido d group by d.pedido.idPedido")
     List<CantProductosXPedidoDTO> cantProdXPedidos();
 
     @Query(value = "select new com.msi.easyventas.dtos.CantProductosXPedidoDTO(sum(d.cantidad), d.pedido.idPedido) from DetallePedido d where d.pedido.idPedido = ?1")

@@ -50,25 +50,31 @@ public class EmpleadoService implements iEmpleadoService {
         if (empleadoRepository.existsByDocumento(empleadoRequestDTO.getDocumento())) {
             throw new Exception("El Vendedor ya existe o es Administrador.");
         } else {
-            Ciudad ciudad = ciudadRepository.findById(empleadoRequestDTO.getId_ciudad()).orElseThrow();
-            TipoDoc tipoDoc = tipoDocRepository.findById(empleadoRequestDTO.getId_tipo_doc()).orElseThrow();
-            RolEmpleado rolEmpleado = new RolEmpleado();
-            rolEmpleado.setId(2);
+            if (empleadoRequestDTO.getDocumento() <= 0 || empleadoRequestDTO.getApellido() == ""
+                    || empleadoRequestDTO.getDomicilio() == "" || empleadoRequestDTO.getNombre() == ""
+                    || empleadoRequestDTO.getContraseña() == "") {
+                throw new Exception("No se puede agregar porque hay campos nulos.");
+            } else {
+                Ciudad ciudad = ciudadRepository.findById(empleadoRequestDTO.getId_ciudad()).orElseThrow();
+                TipoDoc tipoDoc = tipoDocRepository.findById(empleadoRequestDTO.getId_tipo_doc()).orElseThrow();
+                RolEmpleado rolEmpleado = new RolEmpleado();
+                rolEmpleado.setId(2);
 
-            Empleado empleado = new Empleado();
+                Empleado empleado = new Empleado();
 
-            empleado.setDocumento(empleadoRequestDTO.getDocumento());
-            empleado.setGenero(empleadoRequestDTO.getGenero());
-            empleado.setRolEmpleado(rolEmpleado);
-            empleado.setApellido(empleadoRequestDTO.getApellido());
-            empleado.setCiudad(ciudad);
-            empleado.setEstado(empleadoRequestDTO.getEstado());
-            empleado.setNombre(empleadoRequestDTO.getNombre());
-            empleado.setDomicilio(empleadoRequestDTO.getDomicilio());
-            empleado.setTipoDoc(tipoDoc);
-            empleado.setContraseña(empleadoRequestDTO.getContraseña());
+                empleado.setDocumento(empleadoRequestDTO.getDocumento());
+                empleado.setGenero(empleadoRequestDTO.getGenero());
+                empleado.setRolEmpleado(rolEmpleado);
+                empleado.setApellido(empleadoRequestDTO.getApellido());
+                empleado.setCiudad(ciudad);
+                empleado.setEstado(empleadoRequestDTO.getEstado());
+                empleado.setNombre(empleadoRequestDTO.getNombre());
+                empleado.setDomicilio(empleadoRequestDTO.getDomicilio());
+                empleado.setTipoDoc(tipoDoc);
+                empleado.setContraseña(empleadoRequestDTO.getContraseña());
 
-            empleadoRepository.save(empleado);
+                empleadoRepository.save(empleado);
+            }
         }
     }
 
@@ -106,14 +112,15 @@ public class EmpleadoService implements iEmpleadoService {
             List<Empleado> empleados = empleadoRepository.searchByDocumento(empleadoRequestDTO.getDocumento());
             if (empleadoRepository.existsByDocumento(empleadoRequestDTO.getDocumento())) {
                 for (Empleado empleado : empleados) {
-                    if (empleado.getRolEmpleado().getId() == 2) {
+                    if (empleado.getRolEmpleado().getId() == 2 && empleadoRequestDTO.getDocumento() > 0 && empleadoRequestDTO.getApellido() != ""
+                            && empleadoRequestDTO.getDomicilio() != "" && empleadoRequestDTO.getNombre() != ""
+                            && empleadoRequestDTO.getContraseña() != "") {
                         Ciudad ciudad = ciudadRepository.findById(empleadoRequestDTO.getId_ciudad()).orElseThrow();
                         TipoDoc tipoDoc = tipoDocRepository.findById(empleadoRequestDTO.getId_tipo_doc()).orElseThrow();
                         String contraseñaEmpleado;
                         contraseñaEmpleado = empleado.getContraseña();
                         RolEmpleado rolEmpleado = new RolEmpleado();
                         rolEmpleado.setId(2);
-
 
                         empleado.setDocumento(empleadoRequestDTO.getDocumento());
                         empleado.setGenero(empleadoRequestDTO.getGenero());
@@ -126,8 +133,7 @@ public class EmpleadoService implements iEmpleadoService {
                         empleado.setTipoDoc(tipoDoc);
                         empleado.setContraseña(contraseñaEmpleado);
                         empleadoRepository.save(empleado);
-                    }
-                    else{
+                    } else {
                         throw new Exception("No existe el vendedor o es Administrador.");
                     }
                 }

@@ -6,6 +6,7 @@ import com.msi.easyventas.dtos.ClienteResponseDTO;
 import com.msi.easyventas.models.Cliente;
 import com.msi.easyventas.services.ClienteService;
 import com.msi.easyventas.services.ServiceResponse;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,7 @@ public class ClienteController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/add/cliente")
-    public ResponseEntity<?> addCliente(@RequestBody ClienteRequestDTO nuevoCliente) throws Exception {
+    public ResponseEntity<?> addCliente(@NotNull @RequestBody ClienteRequestDTO nuevoCliente) throws Exception {
         ServiceResponse<?> response = new ServiceResponse<>("success", "Se agregó correctamente el cliente.");
         ServiceResponse<?> response2 = new ServiceResponse<>("error", "Cliente ya existe, o seleccione una ciudad y tipo de documento válido.");
         if (nuevoCliente != null) {

@@ -9,7 +9,7 @@ var mychart2 = new Chart(ctx2,
                         backgroundColor: ['#01FCA1', '#FCB401', '#01CBFC', '#B8FC01'],
                         label: 'Cantiadad de Productos por pedido',
                         borderColor: ['black'],
-                        borderWidth: 3
+                        borderWidth: 1
                     }]
             },
         options:

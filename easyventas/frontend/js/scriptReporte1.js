@@ -1,7 +1,7 @@
 var ctx = document.getElementById('reporte1')
 var mychart = new Chart(ctx,
     {
-        type: 'bar',
+        type: 'line',
         data:
             {
                 datasets:
