@@ -482,7 +482,6 @@
 
         },
         error: function (e) {
-
           if (data.id_tipo_doc === "SELECCIONE") {
             swal("Advertencia", "Seleccione un tipo de documento", "info");
             return false;
@@ -495,7 +494,6 @@
             swal("Advertencia", "Seleccione un estado", "info");
             return false;
           }
-
           else {
             swal("Error", "No se pudo agregar el cliente con ese documento o los valores ingresados no corresponden", "warning");
           }

@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cca6d051-64bd-4e9f-af2c-52469be1c0d6" name="Changes" comment="Carga de Frontend completo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/js/scriptReporte1.js" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/js/scriptReporte1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/js/scriptReporte2.js" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/js/scriptReporte2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyventas/frontend/js/scriptReporte3.js" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/js/scriptReporte3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/clientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/clientes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/frontend/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/frontend/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyventas/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/easyventas/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +78,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.pedidos.html" />
+        <item itemvalue="JavaScript Debug.indexReporte.html" />
         <item itemvalue="JavaScript Debug.indexReporte.html" />
         <item itemvalue="JavaScript Debug.pedidos.html" />
       </list>
